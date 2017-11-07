@@ -1,0 +1,31 @@
+<div>
+    networkView
+    {{network.toData ()}}
+</div>
+<!-- neurons -->
+<div class="layer-container">
+    <!-- input neurons -->
+    <div class="layer"> 
+        <neuron-view *ngFor="let neuron of network.getInputLayer()" [neuron]="neuron"></neuron-view>
+    </div>
+
+    <!-- hidden neurons -->
+    <div class="layer" *ngFor="let layer of network.getHiddenLayers()">
+        <neuron-view *ngFor="let neuron of layer" [neuron]="neuron"></neuron-view>
+    </div>
+
+    <!-- output neurons -->
+    <div class="layer">
+        <neuron-view *ngFor="let neuron of network.getOutputLayer()" [neuron]="neuron"></neuron-view>
+    </div>
+</div>
+<!-- connection -->
+<div class="layer-container">
+
+    <!-- output neurons -->
+    <div class="layer">
+        <span *ngFor="let neuron of network.getOutputLayer()">
+            <connection-view *ngFor="let connection of neuron.connections" [connection]="connection"></connection-view>
+        </span>
+    </div>
+</div>
