@@ -19,8 +19,7 @@ export class NetworkViewComponent {
     })
   }
 
-  private getPos (id:string):{x:string, y:string}
-  {
+  private getPos (id:string):{x:string, y:string} {
       let elem:HTMLElement = document.querySelector('#neuron_' + id) as HTMLElement;
       if(elem){
           return {x:elem.offsetLeft + elem.offsetWidth/2 + 'px', y:elem.offsetTop + elem.offsetHeight/2 + 'px'};
@@ -29,8 +28,7 @@ export class NetworkViewComponent {
       }
   }
 
-  private getLineStyle (weight:number):object
-  {
+  private getLineStyle (weight:number):object {
       return {
             'stroke': weight > 0 ? 'green' : 'red',
             'strokeWidth': Math.abs(weight * 2) + 2

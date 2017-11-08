@@ -1,3 +1,4 @@
+import { ControlsViewComponent } from './components/controls-view/controls-view.component';
 import { ConnectionViewComponent } from './components/connection-view/connection-view.component';
 import { NeuronViewComponent } from './components/neuron-view/neuron-view.component';
 import { NetworkViewComponent } from './components/network-view/network-view.component';
@@ -15,7 +16,8 @@ import { AppComponent } from './app.component';
     MainComponent,
     NetworkViewComponent,
     NeuronViewComponent,
-    ConnectionViewComponent
+    ConnectionViewComponent,
+    ControlsViewComponent
   ],
   imports: [
     BrowserModule

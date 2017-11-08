@@ -2,10 +2,20 @@
     background: yellow;
     width: 80px;
     height: 80px;
-    border-radius: 80px;
     margin:10px;
     border: 1px solid black;
-    display: block;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+:host .circle {
+    background: red;
+    width: 40px;
+    height: 40px;
+    border-radius: 80px;
+    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;

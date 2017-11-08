@@ -10,5 +10,13 @@ export class NeuronViewComponent {
 
   @Input ('neuron') private neuron:Neuron;
 
+  private getCircleStyle ():object {
+      let radius:number = Math.max(5, 20 + this.neuron.output * 20) 
+      return {
+          width: radius + 'px',
+          height: radius + 'px'
+      }
+  }
+
 
 }

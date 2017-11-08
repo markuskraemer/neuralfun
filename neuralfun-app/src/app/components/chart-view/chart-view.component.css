@@ -1,0 +1,11 @@
+:host {
+    background: yellow;
+    width: 80px;
+    height: 80px;
+    margin:10px;
+    border: 1px solid black;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+}

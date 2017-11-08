@@ -1,7 +1,4 @@
-<div>
-    networkView
-    {{network.toData ()}}
-</div>
+
 <!-- neurons -->
 <div class="neurons-container">
     <!-- input neurons -->
@@ -22,10 +19,9 @@
 <!-- connection -->
 <svg class="connections-container">
 
-    <!-- output neurons -->
-        <g *ngFor="let neuron of network.getOutputLayer()">
-            <!--connection-view *ngFor="let connection of neuron.connections" [connection]="connection" ></connection-view>
-            -->
+    <!-- hidden neurons -->
+    <g class="layer" *ngFor="let layer of network.getHiddenLayers()">
+        <g *ngFor="let neuron of layer">
             <line *ngFor="let connection of neuron.connections"
                             attr.x1={{getPos(connection.fromNeuron.id).x}}
                             attr.y1={{getPos(connection.fromNeuron.id).y}}
@@ -33,7 +29,20 @@
                             attr.y2={{getPos(neuron.id).y}}
                             [ngStyle]="getLineStyle(connection.weight)"
                         ></line>
-
         </g>
+    </g>
+
+    <!-- output neurons -->
+    <g *ngFor="let neuron of network.getOutputLayer()">
+        <line *ngFor="let connection of neuron.connections"
+                        attr.x1={{getPos(connection.fromNeuron.id).x}}
+                        attr.y1={{getPos(connection.fromNeuron.id).y}}
+                        attr.x2={{getPos(neuron.id).x}}
+                        attr.y2={{getPos(neuron.id).y}}
+                        [ngStyle]="getLineStyle(connection.weight)"
+                    ></line>
+
+    </g>
     
 </svg>
+

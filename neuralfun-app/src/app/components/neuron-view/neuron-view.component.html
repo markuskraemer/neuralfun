@@ -1,3 +1,12 @@
 <div>
-    N {{neuron.id}}
+    <div class="circle" [ngStyle]="getCircleStyle()">
+        {{neuron.id}}
+    </div>
+    <div>
+        -> {{neuron.output}}<br>
+        <span *ngIf="neuron.target!=undefined">
+            D {{neuron.output-neuron.target}}
+            T {{neuron.target}}
+        </span>
+    </div>
 </div>
