@@ -3,7 +3,7 @@
     {{network.toData ()}}
 </div>
 <!-- neurons -->
-<div class="layer-container">
+<div class="neurons-container">
     <!-- input neurons -->
     <div class="layer"> 
         <neuron-view *ngFor="let neuron of network.getInputLayer()" [neuron]="neuron" attr.id="neuron_{{neuron.id}}"></neuron-view>

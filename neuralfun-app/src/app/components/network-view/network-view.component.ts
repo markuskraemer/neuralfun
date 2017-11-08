@@ -1,4 +1,4 @@
-import { Component, Input, ApplicationRef } from '@angular/core';
+import { Component, Input, ApplicationRef, ChangeDetectorRef } from '@angular/core';
 import { Network } from '../../network/Network';
 
 @Component({
@@ -11,21 +11,22 @@ export class NetworkViewComponent {
   @Input('network') public network:Network;
 
   constructor (
-    private applicationRef:ApplicationRef
+    private applicationRef:ApplicationRef,
+    private changeDetectorRef:ChangeDetectorRef
   ){
-
+    window.addEventListener('resize', () => {
+      this.changeDetectorRef.detectChanges ();
+    })
   }
 
   private getPos (id:string):{x:string, y:string}
   {
-    let elem:HTMLElement = document.querySelector('#neuron_' + id) as HTMLElement;
-    if(elem){
-      let computed:CSSStyleDeclaration = window.getComputedStyle (elem);
-      return {x:elem.offsetLeft + 'px', y:elem.offsetTop + 'px'};
-    }else{
-      setTimeout(()=> this.applicationRef.tick (), 2000);
-      return {x:'0', y:'0'};
-    }
+      let elem:HTMLElement = document.querySelector('#neuron_' + id) as HTMLElement;
+      if(elem){
+          return {x:elem.offsetLeft + elem.offsetWidth/2 + 'px', y:elem.offsetTop + elem.offsetHeight/2 + 'px'};
+      }else{
+          return {x:'0', y:'0'};
+      }
   }
 
   private getLineStyle (weight:number):object
