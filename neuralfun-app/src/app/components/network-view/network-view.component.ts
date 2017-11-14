@@ -1,3 +1,4 @@
+import { ColorService } from './../colors.service';
 import { Component, Input, ApplicationRef, ChangeDetectorRef } from '@angular/core';
 import { Network } from '../../network/Network';
 
@@ -12,7 +13,8 @@ export class NetworkViewComponent {
 
   constructor (
     private applicationRef:ApplicationRef,
-    private changeDetectorRef:ChangeDetectorRef
+    private changeDetectorRef:ChangeDetectorRef,
+    private colorService:ColorService
   ){
     window.addEventListener('resize', () => {
       this.changeDetectorRef.detectChanges ();
@@ -33,6 +35,11 @@ export class NetworkViewComponent {
             'stroke': weight > 0 ? 'green' : 'red',
             'strokeWidth': Math.abs(weight * 2) + 2
         }
-    }
+  }
+
+  private getNeuronsContainerHeight ():string {
+      let elem:HTMLElement = document.querySelector('#neurons-container') as HTMLElement;
+      return elem.offsetHeight + 'px';      
+  }
 
 }

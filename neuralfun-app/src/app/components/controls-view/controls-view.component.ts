@@ -10,4 +10,10 @@ export class ControlsViewComponent {
 
     @Input('network') private network:Network;
 
+
+    private startOrStopLearn ():void {
+      
+      this.network.trainDelta ();
+    }
+
 }

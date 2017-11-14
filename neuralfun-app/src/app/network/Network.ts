@@ -1,4 +1,5 @@
-﻿import { Neuron } from './Neuron';
+﻿import { NetworkHistory } from './NetworkHistory';
+import { Neuron } from './Neuron';
 import { InputNeuron } from './InputNeuron';
 import { WorkingNeuron } from './WorkingNeuron';
 import { Connection } from './Connection';
@@ -6,6 +7,7 @@ import { Connection } from './Connection';
 export class Network
 {
     public neurons: Neuron[][] = [];
+    public history:NetworkHistory = new NetworkHistory ();
 
     constructor(private sizes: number[])
     {
@@ -28,7 +30,7 @@ export class Network
 
     public toJSON(): any
     {
-        return { neurons: this.neurons, squaredErrors: this.getSquaredErrors() };
+        return { neurons: JSON.parse(JSON.stringify(this.neurons)), squaredErrors: this.getSquaredErrors() };
     }
 
     public static createTestNetwork(): Network
@@ -233,6 +235,8 @@ export class Network
 
     public trainDelta(): void
     {
+        this.history.add(this.toJSON());
+
         var outputLayer: WorkingNeuron[] = this.getOutputLayer();
         for (var neuron of outputLayer)
             neuron.trainWeightsDelta();
@@ -241,20 +245,22 @@ export class Network
 
     public trainBackPropagation(): void
     {
+        this.history.add(this.toJSON());
+        
         this.trainOutputNeuronsBackPropagation();
         if (this.neurons.length > 2)
             this.trainHiddenNeuronsBackPropagation();
         this.updateWeights();
     }
 
-    public trainOutputNeuronsBackPropagation (): void
+    private trainOutputNeuronsBackPropagation (): void
     {
         var outputLayer: WorkingNeuron[] = this.getOutputLayer();
         for (var neuron of outputLayer)
             neuron.trainWeightsBackPropagation(neuron.output - neuron.target);
     }
 
-    public trainHiddenNeuronsBackPropagation(): void
+    private trainHiddenNeuronsBackPropagation(): void
     {
         var hiddenLayer: WorkingNeuron[] = this.getHiddenLayers()[0];
         for (var i: number = 0; i < hiddenLayer.length; ++i)

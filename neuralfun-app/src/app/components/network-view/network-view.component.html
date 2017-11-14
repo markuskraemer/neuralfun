@@ -1,6 +1,7 @@
 
 <!-- neurons -->
-<div class="neurons-container">
+<div class="neurons-container" id="neurons-container">
+
     <!-- input neurons -->
     <div class="layer"> 
         <neuron-view *ngFor="let neuron of network.getInputLayer()" [neuron]="neuron" attr.id="neuron_{{neuron.id}}"></neuron-view>
@@ -13,11 +14,14 @@
 
     <!-- output neurons -->
     <div class="layer">
-        <neuron-view *ngFor="let neuron of network.getOutputLayer()" [neuron]="neuron" attr.id="neuron_{{neuron.id}}"></neuron-view>
+        <neuron-view *ngFor="let neuron of network.getOutputLayer();let i = index" 
+                            [neuron]="neuron" 
+                            [color]="colorService.getOutputNeuronColor(i)" 
+                            attr.id="neuron_{{neuron.id}}" ></neuron-view>
     </div>
 </div>
 <!-- connection -->
-<svg class="connections-container">
+<svg class="connections-container" [style.height]="getNeuronsContainerHeight()">
 
     <!-- hidden neurons -->
     <g class="layer" *ngFor="let layer of network.getHiddenLayers()">

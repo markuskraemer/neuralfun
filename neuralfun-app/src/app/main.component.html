@@ -1,2 +1,21 @@
-<network-view [network]="network">
-</network-view>
+<div>
+    training:{{isTraining}}<br>
+    Lesson:
+     <select [(ngModel)]="selectedLessonIndex">
+        <option *ngFor="let lesson of lessonLoader.lessons; let i = index"               
+                    value={{i}}
+                    label={{lesson.name}}                
+                >   
+    </select><span *ngIf="lesson != undefined">patterns:{{lesson.patterns.length}}</span> 
+    <br>
+    epochs:<input type="number" [value]="epoches" (change)="epoches = $event.target.value">
+            <input type="button" value="{{isTraining?'STOP':'START'}}" (click)="startOrStopTrain()">
+    <br>
+    totalEpoches:{{totalEpoches}}
+</div>
+<div class="view-container">
+    <network-view [network]="network"></network-view>
+</div>
+<chart-view [history]="network.history" [update]="!isTraining">
+
+</chart-view>
