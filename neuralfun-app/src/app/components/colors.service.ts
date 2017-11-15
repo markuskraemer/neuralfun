@@ -53,4 +53,8 @@ export class ColorService {
         return colors[index%colors.length];
     }
 
+    public getSquaredErrorsColor ():string {
+        return 'red';
+    }
+
 }

@@ -10,6 +10,7 @@ class LineVisibilities {
     public neurons: boolean[] = [];
     public neuronTargets: boolean[] = [];
     public neuronDeltas: boolean[] = [];
+    public squaredErrors:boolean = false;
 }
 
 @Component({
@@ -177,6 +178,23 @@ export class CartViewComponent implements OnInit {
         return result;
     }
 
+
+
+    private getSquaredErrors (steps: number[]): any {
+     
+        var result: any[] = [];
+        return {
+                hidden: this.lineVisibility.squaredErrors,
+                lineTension: this.lineTension,
+                label: 'Squared Errors',
+                fill: false,
+                backgroundColor: this.colorService.getSquaredErrorsColor(),
+                borderColor: this.colorService.getSquaredErrorsColor(),
+                data: this.mainService.network.history.getSquaredErrorsHistory(steps)
+            };
+    
+    }
+
     private getPropperValue (a:boolean, b:boolean):boolean {
         return (a === true || a === false) ? a : b;
     }
@@ -188,9 +206,10 @@ export class CartViewComponent implements OnInit {
 
         for (let i: number = 0; i < neuronCount && i < this.chart.data.datasets.length; ++i) {
 
-            this.lineVisibility.neurons[i]          = this.getPropperValue(this.chart['getDatasetMeta'](i).hidden, this.lineVisibility.neurons[i]);
-            this.lineVisibility.neuronTargets[i]    = this.getPropperValue(this.chart['getDatasetMeta'](i + neuronCount).hidden, this.lineVisibility.neuronTargets[i]);
-            this.lineVisibility.neuronDeltas[i]     = this.getPropperValue(this.chart['getDatasetMeta'](i + neuronCount*2).hidden, this.lineVisibility.neuronDeltas[i]);
+            this.lineVisibility.neurons[i]       = this.getPropperValue(this.chart['getDatasetMeta'](i).hidden, this.lineVisibility.neurons[i]);
+            this.lineVisibility.neuronTargets[i] = this.getPropperValue(this.chart['getDatasetMeta'](i + neuronCount).hidden, this.lineVisibility.neuronTargets[i]);
+            this.lineVisibility.neuronDeltas[i]  = this.getPropperValue(this.chart['getDatasetMeta'](i + neuronCount*2).hidden, this.lineVisibility.neuronDeltas[i]);
+            this.lineVisibility.squaredErrors    = this.getPropperValue(this.chart['getDatasetMeta'](i + neuronCount*2+1).hidden, this.lineVisibility.squaredErrors);
         }
 
     }
@@ -222,6 +241,7 @@ export class CartViewComponent implements OnInit {
         datasets = datasets.concat(this.getNeuronOutputs(steps, hideInput, true));
         datasets = datasets.concat(this.getNeuronTargets(steps, hideInput, true));
         datasets = datasets.concat(this.getNeuronDeltas(steps, true));
+        datasets = datasets.concat(this.getSquaredErrors(steps));
 
         this.chart.data = {
             labels: steps.map((value: number, index: number, array: number[]) => { return String(value) }),
