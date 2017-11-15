@@ -16,7 +16,7 @@
     <div class="layer">
         <neuron-view *ngFor="let neuron of network.getOutputLayer();let i = index" 
                             [neuron]="neuron" 
-                            [color]="colorService.getOutputNeuronColor(i)" 
+                            [color]="colorService.getNeuronOutputColor(i)" 
                             attr.id="neuron_{{neuron.id}}" ></neuron-view>
     </div>
 </div>

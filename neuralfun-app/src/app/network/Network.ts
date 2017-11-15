@@ -236,7 +236,7 @@ export class Network
     public trainDelta(): void
     {
         this.history.add(this.toJSON());
-
+        console.log("-> ", this.history.history[this.history.history.length-1]);
         var outputLayer: WorkingNeuron[] = this.getOutputLayer();
         for (var neuron of outputLayer)
             neuron.trainWeightsDelta();

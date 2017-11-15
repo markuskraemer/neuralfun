@@ -14,8 +14,8 @@ export class WorkingNeuron extends Neuron
 
     public toJSON(): any
     {
-        let { output, id, connections, squaredDelta } = this;
-        return { output, id, connections, squaredDelta };
+        let { output, id, connections, squaredDelta, delta, target } = this;
+        return { output, id, connections, squaredDelta, delta, target };
     }
 
     public addConnection(c: Connection): void
@@ -45,6 +45,10 @@ export class WorkingNeuron extends Neuron
         //return this.sigmoid(this.input);
     }
 
+    public get delta(): number
+    {
+        return this.target - this.output;
+    }
 
     public get squaredDelta(): number
     {

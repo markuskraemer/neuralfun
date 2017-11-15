@@ -6,7 +6,7 @@
                     value={{i}}
                     label={{lesson.name}}                
                 >   
-    </select><span *ngIf="lesson != undefined">patterns:{{mainService.lesson.patterns.length}}</span> 
+    </select><span *ngIf="mainService.lesson != undefined"> patterns:{{mainService.lesson.patterns.length}}</span> 
     <br>
     epochs:<input type="number" [value]="mainService.epoches" (change)="mainService.epoches = $event.target.value">
             <input type="button" value="{{mainService.isTraining?'STOP':'START'}}" (click)="mainService.startOrStopTrain()">
@@ -16,6 +16,6 @@
 <div class="view-container">
     <network-view [network]="mainService.network"></network-view>
 </div>
-<chart-view [history]="mainService.network.history" [update]="!mainService.isTraining">
+<chart-view [update]="!mainService.isTraining">
 
 </chart-view>

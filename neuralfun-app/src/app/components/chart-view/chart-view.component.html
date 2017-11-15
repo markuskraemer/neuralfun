@@ -1,6 +1,11 @@
 <div className="chart-view">
     <div className="menu">
-        lessonLength length:
+        <select [(ngModel)]="selectedFilterIndex">
+        <option *ngFor="let filter of filters; let i = index"               
+                    value={{i}}
+                    label={{filter.name}}                
+                >   
+    </select>
     </div>
     <canvas className="chart-canvas" id="chart-canvas" width="800" height="300"></canvas>
 </div>

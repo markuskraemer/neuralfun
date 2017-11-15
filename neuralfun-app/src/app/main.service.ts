@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { Network } from './network/Network';
 import { DataLoader } from './data/DataLoader';
 import { ILesson } from './data/ILessons';
@@ -6,17 +7,16 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MainService {
 
+    public networkChangeSubject:BehaviorSubject<Network>;
+
     public lessonLoader:DataLoader; 
     public epoches:number = 10;
     public totalEpoches:number = 0;
     public patternIndex:number = 0;
+
     private _selectedLessonIndex:number = 0;
     private _network:Network;
-    
-
     private isTraining:boolean = false;
-   
-   
     private rafId:number;
     private requestAnimationFrame:(callback:any)=>number;
     private cancelAnimationFrame:(id:number)=>void;
@@ -34,7 +34,7 @@ export class MainService {
 
 
         this._network = new Network([1,1,1]);
-
+        this.networkChangeSubject = new BehaviorSubject (this.network);
         this.lessonLoader = new DataLoader ();      
         this.lessonLoader.stateChangedSubject.subscribe((state:number)=>{
             if(state == DataLoader.LOAD_FINISHED)
@@ -75,6 +75,7 @@ export class MainService {
                                       this.lesson.patterns[0].targets.length]);
 
         this.updateInputsAndTargets ();
+        this.networkChangeSubject.next(this.network);
     }
 
     private startOrStopTrain ():void {
@@ -112,7 +113,7 @@ export class MainService {
 
     private trainNextEpoche ():boolean {
         
-        if(-- this.epoches > 0) {
+        if(-- this.epoches >= 0) {
             for(this.patternIndex = 0; this.patternIndex < this.lesson.patterns.length; ++this.patternIndex){
                 this.updateInputsAndTargets ();
                 this.network.trainDelta ();

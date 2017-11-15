@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ColorService {
 
-    public getOutputNeuronColor (index:number):string{
+    public getNeuronOutputColor (index:number):string{
         let colors:string[] = [
                                 '#93d1ff',
                                 '#60bafd',
@@ -19,8 +19,24 @@ export class ColorService {
         return colors[index%colors.length];
     }
 
+    public getNeuronTargetColor (index:number):string{
+        let colors:string[] = [
+                                '#93ffd1',
+                                '#60fdba',
+                                '#3effac',
+                                '#0dff97',
+                                '#71ecc7',
+                                '#1ed7bb',
+                                '#18d39a',
+                                '#10ac7d',
+                                '#007350'
+                                ]
 
-    public getSquaredDeltaColor (index:number):string { 
+        return colors[index%colors.length];
+    }
+
+
+    public getDeltaColor (index:number):string { 
         let colors:string[] = [
                                 '#ffd193',
                                 '#fdba60',

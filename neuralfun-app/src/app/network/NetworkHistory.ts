@@ -112,7 +112,8 @@ export class NetworkHistory
         }
     }
 
-    public getNeuronSquaredDeltaAtIndicies(id: string, indicies: number[]): number[]
+
+    public getNeuronPropAtIndicies (id: string, indicies: number[], prop:string): number[]
     {
 
         var result: number[] = [];
@@ -120,24 +121,26 @@ export class NetworkHistory
         {
             let neuron: number = this.getNeuronAtIndex(id, indicies[i]);
             if (neuron != undefined)
-                result.push(neuron['squaredDelta']);
+                result.push(neuron[prop]);
         }
         return result;
     }    
 
+    public getNeuronDeltaAtIndicies(id: string, indicies: number[]): number[]
+    {
+        return this.getNeuronPropAtIndicies(id, indicies, 'delta');
+    }    
 
     public getNeuronOutputAtIndicies (id: string, indicies:number[]): number[]
     {
-       
-        var result: number[] = [];
-        for (let i: number = 0; i < indicies.length; i ++)
-        {
-            let neuron: number = this.getNeuronAtIndex(id, indicies[i]);
-            if (neuron != undefined)
-                result.push(neuron['output']);
-        }
-        return result;
+        return this.getNeuronPropAtIndicies(id, indicies, 'output');       
     }    
+
+    public getNeuronTargetAtIndicies (id: string, indicies:number[]): number[]
+    {
+        return this.getNeuronPropAtIndicies(id, indicies, 'target');       
+    }    
+
 
     public getSquaredErrorsHistory(indicies: number []): number[]
     {
