@@ -1,3 +1,5 @@
+import { MainService } from './../../main.service';
+
 import { ColorService } from './../colors.service';
 import { NetworkHistory } from './../../network/NetworkHistory';
 import { Chart } from 'chart.js';
@@ -21,6 +23,7 @@ export class CartViewComponent implements OnInit {
   @Input('history') private history:NetworkHistory;
   @Input('update') 
   public set update (value:boolean) {
+      console.log("CV update");
       if(value){
         this.draw ();
       }
@@ -32,7 +35,8 @@ export class CartViewComponent implements OnInit {
   private lineVisibility:LineVisibilities = new LineVisibilities ();
 
   constructor (
-    private colorService:ColorService
+    private colorService:ColorService,
+    private mainService:MainService
   ){}
 
 
@@ -69,13 +73,8 @@ export class CartViewComponent implements OnInit {
 
     private includeStep(n: number): boolean
     {
-        let maxSteps:number = 50;
-
-
-    
-
-        const mod: number = 50;
-        const lessonLength: number = this.history.length;
+        const lessonLength: number = this.mainService.lesson.patterns.length;
+        const mod: number = Math.floor(lessonLength * this.history.length / 100);
         if ((n % mod >= 0) && (n % mod < lessonLength))
             return true;
 
@@ -159,6 +158,7 @@ export class CartViewComponent implements OnInit {
           var hideInput: boolean;
           var steps: number[];
           steps = this.createSteps(0, this.history.length, true);
+          console.log("steps: " + steps.length);
           var datasets: any[] = [];
           datasets = datasets.concat(this.getNeuronOutputs(steps, hideInput, true));
           //console.log("draw: ", datasets[datasets.length-1]);

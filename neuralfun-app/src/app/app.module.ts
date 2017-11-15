@@ -1,3 +1,4 @@
+import { MainService } from './main.service';
 import { ColorService } from './components/colors.service';
 import { CartViewComponent } from './components/chart-view/chart-view.component';
 import { ConnectionViewComponent } from './components/connection-view/connection-view.component';
@@ -24,7 +25,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [ColorService],
+  providers: [MainService, ColorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
