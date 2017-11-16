@@ -1,6 +1,6 @@
 ﻿{
   "name": "Grey",
-  "patterns": [
+  "training": [
     {
       "input": [ 0.5, 0.5, 0.5 ],
       "targets": [ 1 ]

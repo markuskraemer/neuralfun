@@ -1,5 +1,9 @@
 
 
+:host .header {
+    background:#eeeeee;
+}
+
 .view-container {
     position: relative;
 }

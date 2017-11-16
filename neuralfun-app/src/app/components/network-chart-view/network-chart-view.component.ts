@@ -77,7 +77,15 @@ export class NetworkChartViewComponent implements OnInit {
     private setUpChart(): void {
         var config: Chart.ChartConfiguration = {};
         var options: Chart.ChartOptions = {};
-
+        
+        options.tooltips = {            
+            'callbacks': {
+                beforeLabel: (tooltipItem, chart) => { 
+                    let itemNum:number = parseInt(tooltipItem.xLabel);
+                    return 'patternNr.: ' + (itemNum % this.mainService.lesson.training.length);
+                }
+            }
+        };
         options.title = {
             display: true,
             text: "Outputs of Neurons and Weights of Connections"
@@ -104,7 +112,7 @@ export class NetworkChartViewComponent implements OnInit {
     private includeStep(n: number): boolean {
 
         const historyLength:number = this.mainService.network.history.length;
-        const lessonLength: number = this.mainService.lesson.patterns.length;
+        const lessonLength: number = this.mainService.lesson.training.length;
 
         if(n >= this.mainService.network.history.length - lessonLength)
             return true;
@@ -232,7 +240,7 @@ export class NetworkChartViewComponent implements OnInit {
                     break;
 
             case 1:
-                    const lessonLength: number = this.mainService.lesson.patterns.length;
+                    const lessonLength: number = this.mainService.lesson.training.length;
                     steps = this.createSteps(this.mainService.network.history.length-lessonLength, lessonLength, false);
                     break;
                     

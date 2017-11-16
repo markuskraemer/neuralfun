@@ -1,6 +1,6 @@
 {
   "name": "1-4",
-  "patterns": [
+  "training": [
     {
       "input": [ 0, 0, 0 ],
       "targets": [ 0 ]

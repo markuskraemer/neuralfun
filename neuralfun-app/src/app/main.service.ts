@@ -70,9 +70,9 @@ export class MainService {
         this.stopTrain ();
         this.totalEpoches = 0;
         this.patternIndex = 0;
-        this._network = new Network ([this.lesson.patterns[0].input.length, 
+        this._network = new Network ([this.lesson.training[0].input.length, 
                                                                           0, 
-                                      this.lesson.patterns[0].targets.length]);
+                                      this.lesson.training[0].targets.length]);
 
         this.updateInputsAndTargets ();
         this.networkChangeSubject.next(this.network);
@@ -93,8 +93,8 @@ export class MainService {
     }
 
     private updateInputsAndTargets ():void {
-        this.network.setInputs(this.lesson.patterns[this.patternIndex].input);
-        this.network.setOutputTargets(this.lesson.patterns[this.patternIndex].targets);        
+        this.network.setInputs(this.lesson.training[this.patternIndex].input);
+        this.network.setOutputTargets(this.lesson.training[this.patternIndex].targets);        
     }
 
     private train ():void {
@@ -114,7 +114,7 @@ export class MainService {
     private trainNextEpoche ():boolean {
         
         if(-- this.epoches >= 0) {
-            for(this.patternIndex = 0; this.patternIndex < this.lesson.patterns.length; ++this.patternIndex){
+            for(this.patternIndex = 0; this.patternIndex < this.lesson.training.length; ++this.patternIndex){
                 this.updateInputsAndTargets ();
                 this.network.trainDelta ();
             }

@@ -1,4 +1,4 @@
-<div>
+<div class="header">
     training:{{mainService.isTraining}}<br>
     Lesson:
      <select [(ngModel)]="mainService.selectedLessonIndex">
@@ -6,12 +6,13 @@
                     value={{i}}
                     label={{lesson.name}}                
                 >   
-    </select><span *ngIf="mainService.lesson != undefined"> patterns:{{mainService.lesson.patterns.length}}</span> 
+    </select><span *ngIf="mainService.lesson != undefined"> patterns:{{mainService.lesson.training.length}}</span> 
     <br>
     epochs:<input type="number" [value]="mainService.epoches" (change)="mainService.epoches = $event.target.value">
             <input type="button" value="{{mainService.isTraining?'STOP':'START'}}" (click)="mainService.startOrStopTrain()">
     <br>
     totalEpoches:{{mainService.totalEpoches}}
+    squaredErrors:{{mainService.network.getSquaredErrors ()}}
 </div>
 <div class="view-container">
     <network-view [network]="mainService.network"></network-view>
@@ -21,7 +22,7 @@
 </network-chart-view>
 
 <div *ngIf="mainService.lesson != undefined">
-    <pattern-chart-view *ngFor="let pattern of mainService.lesson.patterns; let i = index"
+    <pattern-chart-view *ngFor="let pattern of mainService.lesson.training; let i = index"
         pattern-index={{i}} 
         [update]="!mainService.isTraining">
     </pattern-chart-view>

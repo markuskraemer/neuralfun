@@ -122,7 +122,7 @@ export class PatternChartViewComponent implements OnInit {
     private includeStep(n: number): boolean {
 
         const historyLength:number = this.mainService.network.history.length;
-        const lessonLength: number = this.mainService.lesson.patterns.length;
+        const lessonLength: number = this.mainService.lesson.training.length;
 
         const mod: number = lessonLength* Math.ceil(historyLength / 100);
 
@@ -246,7 +246,7 @@ export class PatternChartViewComponent implements OnInit {
                     break;
 
             case 1:
-                    const lessonLength: number = this.mainService.lesson.patterns.length;
+                    const lessonLength: number = this.mainService.lesson.training.length;
                     steps = this.createSteps(this.mainService.network.history.length-lessonLength+this.patternIndex-1, 1, false);
                     break;
                     

@@ -9,7 +9,7 @@ export interface IPattern
 export interface ILesson
 {
     name: string;
-    patterns: IPattern[];
+    training: IPattern[];
 
 }
 

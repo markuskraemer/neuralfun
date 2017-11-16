@@ -1,9 +1,9 @@
 ﻿{
   "name": "RGB",
-  "patterns": [
+  "training": [
     {
       "input":   [ 1, 0, 0 ],
-      "targets": [ 2, 0, 0 ]
+      "targets": [ 1, 0, 0 ]
     },
     {
       "input":   [ 0, 1, 0 ],
@@ -18,23 +18,23 @@
       "targets": [ 0, 1, 1 ]
     },
     {
-      "input": [ 1, 1, 0 ],
-      "targets": [ 1, 1, 0 ]
+    "input":      [ 1, 1, 0 ],
+      "targets":  [ 1, 1, 0 ]
     },
     {
-      "input": [ 0.7, 0, 0 ],
+      "input":   [ 0.7, 0, 0 ],
       "targets": [ 0.7, 0, 0 ]
     },
     {
-      "input":  [ 0, 0.7, 0 ],
+      "input":   [ 0, 0.7, 0 ],
       "targets": [ 0, 0.7, 0 ]
     },
     {
-      "input": [ 0, 0, 0.7 ],
+      "input":   [ 0, 0, 0.7 ],
       "targets": [ 0, 0, 0.7 ]
     },
     {
-      "input": [ 0, 0, 0.2 ],
+      "input":   [ 0, 0, 0.2 ],
       "targets": [ 0, 0, 0.2 ]
     },
         {
