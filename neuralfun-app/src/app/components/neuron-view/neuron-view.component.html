@@ -2,10 +2,12 @@
     {{neuron.id}}
 </div>
 <div class="info">
-    -> {{neuron.output}}
-    <span *ngIf="neuron.target!=undefined">
-        <br />
-        D {{neuron.output-neuron.target}}<br />
-        T {{neuron.target}}
-    </span>
+    <div class="info-content">
+        o {{neuron.output}}
+        <span *ngIf="neuron.target!=undefined">
+            <br />
+            D {{neuron.output-neuron.target}}<br />
+            T {{neuron.target}}
+        </span>
+    </div>
 </div>

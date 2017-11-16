@@ -4,7 +4,7 @@ import { ColorService } from './../colors.service';
 import { NetworkHistory } from './../../network/NetworkHistory';
 import { Network } from './../../network/Network';
 import { Chart } from 'chart.js';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Directive, ViewContainerRef } from '@angular/core';
 
 class LineVisibilities {
     public neurons: boolean[] = [];
@@ -13,12 +13,30 @@ class LineVisibilities {
     public squaredErrors:boolean = false;
 }
 
+@Directive({selector: 'chart-canvas'})
+class ChartCanvas {
+}
+
+
 @Component({
-    selector: 'chart-view',
-    templateUrl: './chart-view.component.html',
-    styleUrls: ['./chart-view.component.css']
+    selector: 'pattern-chart-view',
+    templateUrl: './pattern-chart-view.component.html',
+    styleUrls: ['./pattern-chart-view.component.css']
 })
-export class CartViewComponent implements OnInit {
+export class PatternChartViewComponent implements OnInit {
+
+    @ViewChild('myCanvas', {read:ViewContainerRef}) chartCanvas:ViewContainerRef; 
+
+    private _patternIndex:number = 0
+
+    @Input('pattern-index') 
+    private set patternIndex (value:number) {
+        this._patternIndex = Number(value);    
+    }
+
+    private get patternIndex ():number{
+        return this._patternIndex;    
+    }
 
     @Input('update')
     public set update(value: boolean) {
@@ -31,7 +49,7 @@ export class CartViewComponent implements OnInit {
     private chart: Chart;
     private showLastLessonOnly: boolean = false;
     private lineTension: number = 0;
-    private lineVisibility: LineVisibilities = new LineVisibilities();
+    private lineVisibility: LineVisibilities;
 
     private filters: any[] = [
         { name: "all" },
@@ -50,7 +68,7 @@ export class CartViewComponent implements OnInit {
         this.mainService.networkChangeSubject.subscribe((network: Network) => {
 
             if (network != null)
-                this.updateNetwork();
+                this.updateOnNetworkChange();
 
         })
     }
@@ -66,10 +84,11 @@ export class CartViewComponent implements OnInit {
         }
     }
 
-    private updateNetwork(): void {
+    private updateOnNetworkChange(): void {
         if (this.chart)
             this.chart.destroy();
 
+        this.lineVisibility = new LineVisibilities ();    
         this.setUpChart();
     }
 
@@ -95,7 +114,7 @@ export class CartViewComponent implements OnInit {
         config.options = options;
 
 
-        this.chart = new Chart('chart-canvas', config);
+        this.chart = new Chart(<any>this.chartCanvas.element.nativeElement, config);
 
 
     }
@@ -105,11 +124,9 @@ export class CartViewComponent implements OnInit {
         const historyLength:number = this.mainService.network.history.length;
         const lessonLength: number = this.mainService.lesson.patterns.length;
 
-        if(n >= this.mainService.network.history.length - lessonLength)
-            return true;
+        const mod: number = lessonLength* Math.ceil(historyLength / 100);
 
-        const mod: number = Math.ceil(lessonLength * historyLength / 100);
-        if ((n % mod >= 0) && (n % mod < lessonLength))
+        if (n % mod == this.patternIndex)
             return true;
 
         return false;
@@ -230,7 +247,7 @@ export class CartViewComponent implements OnInit {
 
             case 1:
                     const lessonLength: number = this.mainService.lesson.patterns.length;
-                    steps = this.createSteps(this.mainService.network.history.length-lessonLength, lessonLength, false);
+                    steps = this.createSteps(this.mainService.network.history.length-lessonLength+this.patternIndex-1, 1, false);
                     break;
                     
             default:

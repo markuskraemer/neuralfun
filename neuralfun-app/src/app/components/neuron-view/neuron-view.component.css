@@ -1,10 +1,8 @@
 :host {
     position: relative;
-    background: yellow;
     width: 80px;
     height: 80px;
     margin:10px;
-    border: 1px solid black;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -24,8 +22,14 @@
 
 :host .info{
     position: absolute;
-    background:rgba(255,255,255,.75);
-    border:1px solid grey;
-    left: 100%;
     top: 0;
+    left:0;
+}
+
+:host .info-content{
+    position: relative;
+    width:100%;
+    background:white;
+    border:1px solid grey;
+    margin-left:70px;
 }

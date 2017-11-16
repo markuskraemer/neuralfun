@@ -1,0 +1,10 @@
+:host {
+
+    border-color:grey;
+    border-width: 0 1px 1px 1px;
+    display: block;
+}
+
+:host:nth-child(odd){
+    background:#eeeeee;
+}

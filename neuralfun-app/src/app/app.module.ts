@@ -1,6 +1,7 @@
+import { PatternChartViewComponent } from './components/pattern-chart-view/pattern-chart-view.component';
 import { MainService } from './main.service';
 import { ColorService } from './components/colors.service';
-import { CartViewComponent } from './components/chart-view/chart-view.component';
+import { NetworkChartViewComponent } from './components/network-chart-view/network-chart-view.component';
 import { ConnectionViewComponent } from './components/connection-view/connection-view.component';
 import { NeuronViewComponent } from './components/neuron-view/neuron-view.component';
 import { NetworkViewComponent } from './components/network-view/network-view.component';
@@ -19,7 +20,8 @@ import { AppComponent } from './app.component';
     NetworkViewComponent,
     NeuronViewComponent,
     ConnectionViewComponent,
-    CartViewComponent
+    NetworkChartViewComponent,
+    PatternChartViewComponent
   ],
   imports: [
     BrowserModule,

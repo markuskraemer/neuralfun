@@ -16,6 +16,13 @@
 <div class="view-container">
     <network-view [network]="mainService.network"></network-view>
 </div>
-<chart-view [update]="!mainService.isTraining">
+<network-chart-view [update]="!mainService.isTraining">
 
-</chart-view>
+</network-chart-view>
+
+<div *ngIf="mainService.lesson != undefined">
+    <pattern-chart-view *ngFor="let pattern of mainService.lesson.patterns; let i = index"
+        pattern-index={{i}} 
+        [update]="!mainService.isTraining">
+    </pattern-chart-view>
+</div>

@@ -1,0 +1,12 @@
+<div className="chart-view">
+    Pattern Nr.:{{patternIndex}}
+    <div className="menu">
+        <select [(ngModel)]="selectedFilterIndex">
+        <option *ngFor="let filter of filters; let i = index"               
+                    value={{i}}
+                    label={{filter.name}}                
+                >   
+        </select>
+    </div>
+    <canvas className="chart-canvas" #myCanvas width="800" height="150"></canvas>
+</div>
