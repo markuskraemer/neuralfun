@@ -1,12 +1,12 @@
 <div className="chart-view">
     Pattern Nr.:{{patternIndex}}
     <div className="menu">
-        <select [(ngModel)]="selectedFilterIndex">
-        <option *ngFor="let filter of filters; let i = index"               
+        <select [(ngModel)]="selectedSegmentIndex">
+        <option *ngFor="let segments of chartOptionService.segments; let i = index"               
                     value={{i}}
-                    label={{filter.name}}                
+                    label={{segments.name}}                
                 >   
         </select>
     </div>
-    <chart [pattern-index]="patternIndex" [update]="update"></chart>
+    <chart [pattern-index]="patternIndex" [update]="update" [segment]="chartOptionService.segments[selectedSegmentIndex].id"></chart>
 </div>

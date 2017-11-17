@@ -1,3 +1,4 @@
+import { ChartOptionsService } from './chart-options.service';
 import { MainService } from './../../main.service';
 
 import { ColorService } from './../colors.service';
@@ -5,8 +6,6 @@ import { NetworkHistory } from './../../network/NetworkHistory';
 import { Network } from './../../network/Network';
 import { Chart } from 'chart.js';
 import { Component, Input, OnInit, ViewChild, Directive, ViewContainerRef } from '@angular/core';
-
-
 
 
 @Component({
@@ -18,13 +17,8 @@ export class PatternChartViewComponent implements OnInit {
 
     private _patternIndex:number = 0
     private _update:boolean = false;
-    private _selectedFilterIndex: number = 0;
+    private _selectedSegmentIndex: number = 0;
     private showLastLessonOnly: boolean = false;
-
-    private filters: any[] = [
-        { name: "all" },
-        { name: "last only" }
-    ]
 
     @Input('pattern-index') 
     private set patternIndex (value:number) {
@@ -35,19 +29,18 @@ export class PatternChartViewComponent implements OnInit {
         return this._patternIndex;    
     }
 
-    private get selectedFilterIndex(): number {
-        return this._selectedFilterIndex;
+    private get selectedSegmentIndex(): number {
+        return this._selectedSegmentIndex;
     }
 
-    private set selectedFilterIndex(value: number) {
-        if (this._selectedFilterIndex != value) {
-            this._selectedFilterIndex = Number(value);
+    private set selectedSegmentIndex(value: number) {
+        if (this._selectedSegmentIndex != value) {
+            this._selectedSegmentIndex = Number(value);
         }
     }
 
     @Input('update')
     public set update(value: boolean) {
-        console.log("PCV update: " + value);
         this._update = value;
     }
 
@@ -57,7 +50,8 @@ export class PatternChartViewComponent implements OnInit {
 
 
     constructor(
-        private mainService: MainService
+        private mainService: MainService,
+        private chartOptionService:ChartOptionsService
     ) {
     }
 

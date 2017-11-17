@@ -1,3 +1,4 @@
+import { ChartOptionsService } from './components/pattern-chart-view/chart-options.service';
 import { ChartComponent } from './components/pattern-chart-view/chart.component';
 import { PatternChartViewComponent } from './components/pattern-chart-view/pattern-chart-view.component';
 import { MainService } from './main.service';
@@ -29,7 +30,11 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [MainService, ColorService],
+  providers: [
+      MainService, 
+      ColorService,
+      ChartOptionsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

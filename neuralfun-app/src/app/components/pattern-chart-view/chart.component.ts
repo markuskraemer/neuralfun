@@ -1,3 +1,4 @@
+import { ChartSegment } from './chart-options.service';
 import { MainService } from './../../main.service';
 
 import { ColorService } from './../colors.service';
@@ -20,9 +21,15 @@ class LineVisibilities {
 })
 export class ChartComponent implements OnInit {
 
-    @ViewChild('myCanvas', {read:ViewContainerRef}) chartCanvas:ViewContainerRef; 
 
     private _patternIndex:number = 0
+    private chart: Chart;
+    private lineTension: number = 0;
+    private lineVisibility: LineVisibilities;
+    private _segment:ChartSegment;
+
+    @ViewChild('myCanvas', {read:ViewContainerRef}) chartCanvas:ViewContainerRef; 
+
 
     @Input('pattern-index') 
     private set patternIndex (value:number) {
@@ -41,16 +48,20 @@ export class ChartComponent implements OnInit {
         }
     }
 
-    private chart: Chart;
-    private showLastLessonOnly: boolean = false;
-    private lineTension: number = 0;
-    private lineVisibility: LineVisibilities;
+    @Input ('segment')
+    public set segment(value:ChartSegment) {
+        if(this._segment != value){
+            this._segment = value;
+            this.draw ();
+        }
+    } 
 
-    private filters: any[] = [
-        { name: "all" },
-        { name: "last only" }
-    ]
+    public get segment():ChartSegment {
+        return this._segment;
+    } 
 
+
+    
     constructor(
         private colorService: ColorService,
         private mainService: MainService
@@ -115,6 +126,7 @@ export class ChartComponent implements OnInit {
     }
 
     private createSteps(start: number, end: number): number[] {
+        console.log("createSteps: " + start + " > " + end);
         var result: number[] = [];
         for (let i: number = start; i < end; i++) {
           
@@ -125,9 +137,9 @@ export class ChartComponent implements OnInit {
         return result;
     }
 
-    private getNeuronOutputs(steps: number[], hideInputNeurons: boolean, hidden: boolean): any[] {
+    private getNeuronOutputs(steps: number[], hidden: boolean): any[] {
         var result: any[] = [];
-        const neuronIds: string[] = this.mainService.network.history.getNeuronIds(hideInputNeurons);
+        const neuronIds: string[] = this.mainService.network.history.getNeuronIds(true);
         for (var i: number = 0; i < neuronIds.length; ++i) {
             result.push({
                 hidden: this.lineVisibility.neurons[i],
@@ -142,9 +154,9 @@ export class ChartComponent implements OnInit {
         return result;
     }
 
-    private getNeuronTargets(steps: number[], hideInputNeurons: boolean, hidden: boolean): any[] {
+    private getNeuronTargets(steps: number[], hidden: boolean): any[] {
         var result: any[] = [];
-        const neuronIds: string[] = this.mainService.network.history.getNeuronIds(hideInputNeurons);
+        const neuronIds: string[] = this.mainService.network.history.getNeuronIds(true);
         for (var i: number = 0; i < neuronIds.length; ++i) {
             result.push({
                 hidden: this.lineVisibility.neuronTargets[i],
@@ -219,30 +231,28 @@ export class ChartComponent implements OnInit {
 
         this.updateLineVisibilities();
 
-        var hideInput: boolean;
         var steps: number[];
 
-        steps = this.createSteps(0, this.mainService.network.history.length);
+       
 
-        /*        
-        switch(this._selectedFilterIndex){
-            case 0:
+        switch(this._segment){
+            case ChartSegment.ALL:
                     steps = this.createSteps(0, this.mainService.network.history.length);
                     break;
 
-            case 1:
+            case ChartSegment.ONLY_LAST:
                     const lessonLength: number = this.mainService.lesson.training.length;
-                    steps = this.createSteps(this.mainService.network.history.length-lessonLength+this.patternIndex-1, 1);
+                    steps = this.createSteps(this.mainService.network.history.length-lessonLength, this.mainService.network.history.length);
                     break;
                     
             default:
-                    console.error("_selectedFilterIndex not recordnized: ", this._selectedFilterIndex);
+                    console.error("_selectedFilterIndex not recordnized: ", this._segment);
         }
-        */
+
         console.log("steps: " + steps.length);
         var datasets: any[] = [];
-        datasets = datasets.concat(this.getNeuronOutputs(steps, hideInput, true));
-        datasets = datasets.concat(this.getNeuronTargets(steps, hideInput, true));
+        datasets = datasets.concat(this.getNeuronOutputs(steps, true));
+        datasets = datasets.concat(this.getNeuronTargets(steps, true));
         datasets = datasets.concat(this.getNeuronDeltas(steps, true));
         datasets = datasets.concat(this.getSquaredErrors(steps));
 
