@@ -30,14 +30,14 @@ export class NetworkViewComponent {
       }
   }
 
-  private getLineStyle (weight:number):object {
+  public getLineStyle (weight:number):object {
       return {
             'stroke': weight > 0 ? 'green' : 'red',
             'strokeWidth': Math.abs(weight * 2) + 2
         }
   }
 
-  private getNeuronsContainerHeight ():string {
+  public getNeuronsContainerHeight ():string {
       let elem:HTMLElement = document.querySelector('#neurons-container') as HTMLElement;
       return elem.offsetHeight + 'px';      
   }

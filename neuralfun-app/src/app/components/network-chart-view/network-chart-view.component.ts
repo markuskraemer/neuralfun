@@ -33,7 +33,7 @@ export class NetworkChartViewComponent implements OnInit {
     private lineTension: number = 0;
     private lineVisibility: LineVisibilities;
 
-    private filters: any[] = [
+    public filters: any[] = [
         { name: "all" },
         { name: "last only" }
     ]
@@ -55,11 +55,11 @@ export class NetworkChartViewComponent implements OnInit {
         })
     }
 
-    private get selectedFilterIndex(): number {
+    public get selectedFilterIndex(): number {
         return this._selectedFilterIndex;
     }
 
-    private set selectedFilterIndex(value: number) {
+    public set selectedFilterIndex(value: number) {
         if (this._selectedFilterIndex != value) {
             this._selectedFilterIndex = Number(value);
             this.draw();

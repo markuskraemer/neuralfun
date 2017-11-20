@@ -21,46 +21,32 @@ class LineVisibilities {
 })
 export class ChartComponent implements OnInit {
 
-
-    private _patternIndex:number = 0
     private chart: Chart;
     private lineTension: number = 0;
     private lineVisibility: LineVisibilities;
-    private _segment:ChartSegment;
+    private _steps:number[] = [];
 
     @ViewChild('myCanvas', {read:ViewContainerRef}) chartCanvas:ViewContainerRef; 
 
+    @Input ('steps') 
+    private set steps (value:number[]){
+        this._steps = value;
+        //console.log("set steps: " + this.steps.length);
 
-    @Input('pattern-index') 
-    private set patternIndex (value:number) {
-        this._patternIndex = Number(value);    
+        this.draw ();
     }
 
-    private get patternIndex ():number{
-        return this._patternIndex;    
+    private get steps ():number[]{
+        return this._steps;
     }
 
     @Input('update')
     public set update(value: boolean) {
-        console.log("CV update: " + value);
+       // console.log("CV update: " + value);
         if (value) {
             this.draw();
         }
     }
-
-    @Input ('segment')
-    public set segment(value:ChartSegment) {
-        if(this._segment != value){
-            this._segment = value;
-            this.draw ();
-        }
-    } 
-
-    public get segment():ChartSegment {
-        return this._segment;
-    } 
-
-
     
     constructor(
         private colorService: ColorService,
@@ -112,30 +98,7 @@ export class ChartComponent implements OnInit {
 
     }
 
-    private includeStep(n: number): boolean {
-
-        const historyLength:number = this.mainService.network.history.length;
-        const lessonLength: number = this.mainService.lesson.training.length;
-
-        const mod: number = lessonLength* Math.ceil(historyLength / 100);
-
-        if (n % mod == this.patternIndex)
-            return true;
-
-        return false;
-    }
-
-    private createSteps(start: number, end: number): number[] {
-        console.log("createSteps: " + start + " > " + end);
-        var result: number[] = [];
-        for (let i: number = start; i < end; i++) {
-          
-            if (this.includeStep(i))
-                result.push(i);
-
-        }
-        return result;
-    }
+  
 
     private getNeuronOutputs(steps: number[], hidden: boolean): any[] {
         var result: any[] = [];
@@ -231,33 +194,17 @@ export class ChartComponent implements OnInit {
 
         this.updateLineVisibilities();
 
-        var steps: number[];
-
        
 
-        switch(this._segment){
-            case ChartSegment.ALL:
-                    steps = this.createSteps(0, this.mainService.network.history.length);
-                    break;
-
-            case ChartSegment.ONLY_LAST:
-                    const lessonLength: number = this.mainService.lesson.training.length;
-                    steps = this.createSteps(this.mainService.network.history.length-lessonLength, this.mainService.network.history.length);
-                    break;
-                    
-            default:
-                    console.error("_selectedFilterIndex not recordnized: ", this._segment);
-        }
-
-        console.log("steps: " + steps.length);
+        console.log("steps: " + this.steps.length);
         var datasets: any[] = [];
-        datasets = datasets.concat(this.getNeuronOutputs(steps, true));
-        datasets = datasets.concat(this.getNeuronTargets(steps, true));
-        datasets = datasets.concat(this.getNeuronDeltas(steps, true));
-        datasets = datasets.concat(this.getSquaredErrors(steps));
+        datasets = datasets.concat(this.getNeuronOutputs(this.steps, true));
+        datasets = datasets.concat(this.getNeuronTargets(this.steps, true));
+        datasets = datasets.concat(this.getNeuronDeltas(this.steps, true));
+        datasets = datasets.concat(this.getSquaredErrors(this.steps));
 
         this.chart.data = {
-            labels: steps.map((value: number, index: number, array: number[]) => { return String(value) }),
+            labels: this.steps.map((value: number, index: number, array: number[]) => { return String(value) }),
             datasets: datasets
 
         };

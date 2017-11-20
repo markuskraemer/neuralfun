@@ -4,10 +4,10 @@
 <div class="info">
     <div class="info-content">
         o {{neuron.output}}
-        <span *ngIf="neuron.target!=undefined">
+        <span *ngIf="neuronAsWorkingNeuron.target!=undefined">
             <br />
-            D {{neuron.output-neuron.target}}<br />
-            T {{neuron.target}}
+            D {{neuronAsWorkingNeuron.output-neuronAsWorkingNeuron.target}}<br />
+            T {{neuronAsWorkingNeuron.target}}
         </span>
     </div>
 </div>

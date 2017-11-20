@@ -16,7 +16,7 @@ export class MainService {
 
     private _selectedLessonIndex:number = 0;
     private _network:Network;
-    private isTraining:boolean = false;
+    public isTraining:boolean = false;
     private rafId:number;
     private requestAnimationFrame:(callback:any)=>number;
     private cancelAnimationFrame:(id:number)=>void;
@@ -48,11 +48,11 @@ export class MainService {
         return this.lessonLoader.lessons[this._selectedLessonIndex];
     }
 
-    private get selectedLessonIndex ():number {
+    public get selectedLessonIndex ():number {
         return this._selectedLessonIndex;
     }
 
-    private set selectedLessonIndex (value:number){
+    public set selectedLessonIndex (value:number){
         console.log("setSelectedLesson: ", value);
         if(this._selectedLessonIndex != value) {
             this._selectedLessonIndex = value;
@@ -78,7 +78,7 @@ export class MainService {
         this.networkChangeSubject.next(this.network);
     }
 
-    private startOrStopTrain ():void {
+    public startOrStopTrain ():void {
         if(this.isTraining){
             this.stopTrain ();
         }else{

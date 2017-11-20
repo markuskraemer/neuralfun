@@ -13,7 +13,7 @@ export class MainComponent {
 
 
     constructor (
-        private mainService:MainService
+        public mainService:MainService
     ){
        
     }   

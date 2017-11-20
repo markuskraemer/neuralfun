@@ -1,3 +1,4 @@
+import { WorkingNeuron } from './../../network/WorkingNeuron';
 import { Neuron } from './../../network/Neuron';
 import { Component, Input } from '@angular/core';
 
@@ -8,10 +9,14 @@ import { Component, Input } from '@angular/core';
 })
 export class NeuronViewComponent {
 
-  @Input ('neuron') private neuron:Neuron;
+  @Input ('neuron') public neuron:Neuron;
   @Input ('color') private color:string = 'grey';
 
-  private getCircleStyle ():object {
+  public get neuronAsWorkingNeuron ():WorkingNeuron {
+      return this.neuron as WorkingNeuron;
+  }
+
+  public getCircleStyle ():object {
       let radius:number = Math.max(5, 20 + this.neuron.output * 20) 
       return {
           width: radius + 'px',
