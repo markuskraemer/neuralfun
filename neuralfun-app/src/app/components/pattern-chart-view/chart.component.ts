@@ -28,6 +28,10 @@ export class ChartComponent implements OnInit {
 
     @ViewChild('myCanvas', {read:ViewContainerRef}) chartCanvas:ViewContainerRef; 
 
+    @Input ('history')
+    public history:NetworkHistory;
+
+
     @Input ('steps') 
     private set steps (value:number[]){
         this._steps = value;
@@ -102,7 +106,7 @@ export class ChartComponent implements OnInit {
 
     private getNeuronOutputs(steps: number[], hidden: boolean): any[] {
         var result: any[] = [];
-        const neuronIds: string[] = this.mainService.network.history.getNeuronIds(true);
+        const neuronIds: string[] = this.history.getNeuronIds(true);
         for (var i: number = 0; i < neuronIds.length; ++i) {
             result.push({
                 hidden: this.lineVisibility.neurons[i],
@@ -111,7 +115,7 @@ export class ChartComponent implements OnInit {
                 fill: false,
                 backgroundColor: this.colorService.getNeuronOutputColor(i),
                 borderColor: this.colorService.getNeuronOutputColor(i),
-                data: this.mainService.network.history.getNeuronOutputAtIndicies(neuronIds[i], steps)
+                data: this.history.getNeuronOutputAtIndicies(neuronIds[i], steps)
             });
         }
         return result;
@@ -119,7 +123,7 @@ export class ChartComponent implements OnInit {
 
     private getNeuronTargets(steps: number[], hidden: boolean): any[] {
         var result: any[] = [];
-        const neuronIds: string[] = this.mainService.network.history.getNeuronIds(true);
+        const neuronIds: string[] = this.history.getNeuronIds(true);
         for (var i: number = 0; i < neuronIds.length; ++i) {
             result.push({
                 hidden: this.lineVisibility.neuronTargets[i],
@@ -128,7 +132,7 @@ export class ChartComponent implements OnInit {
                 fill: false,
                 backgroundColor: this.colorService.getNeuronTargetColor(i),
                 borderColor: this.colorService.getNeuronTargetColor(i),
-                data: this.mainService.network.history.getNeuronTargetAtIndicies(neuronIds[i], steps)
+                data: this.history.getNeuronTargetAtIndicies(neuronIds[i], steps)
             });
         }
         return result;
@@ -136,7 +140,7 @@ export class ChartComponent implements OnInit {
 
     private getNeuronDeltas(steps: number[], hidden: boolean): any[] {
         var result: any[] = [];
-        const neuronIds: string[] = this.mainService.network.history.getNeuronIds();
+        const neuronIds: string[] = this.history.getNeuronIds();
         for (var i: number = 0; i < neuronIds.length; ++i) {
             result.push({
                 hidden: this.lineVisibility.neuronDeltas[i],
@@ -145,7 +149,7 @@ export class ChartComponent implements OnInit {
                 fill: false,
                 backgroundColor: this.colorService.getDeltaColor(i),
                 borderColor: this.colorService.getDeltaColor(i),
-                data: this.mainService.network.history.getNeuronDeltaAtIndicies(neuronIds[i], steps)
+                data: this.history.getNeuronDeltaAtIndicies(neuronIds[i], steps)
             });
         }
         return result;
@@ -163,7 +167,7 @@ export class ChartComponent implements OnInit {
                 fill: false,
                 backgroundColor: this.colorService.getSquaredErrorsColor(),
                 borderColor: this.colorService.getSquaredErrorsColor(),
-                data: this.mainService.network.history.getSquaredErrorsHistory(steps)
+                data: this.history.getSquaredErrorsHistory(steps)
             };
     
     }
@@ -175,7 +179,7 @@ export class ChartComponent implements OnInit {
 
     private updateLineVisibilities(): void {
 
-        let neuronCount: number = this.mainService.network.history.getNeuronIds().length;
+        let neuronCount: number = this.history.getNeuronIds().length;
 
         for (let i: number = 0; i < neuronCount && i < this.chart.data.datasets.length; ++i) {
 

@@ -18,5 +18,25 @@
       "targets": [ 1 ]
     }
 
+  ],
+    "test": [
+    {
+      "input": [ 0, 0],
+      "targets": [ 0]
+    },
+    {
+      "input": [ 0, 1],
+      "targets": [ 1]
+    },
+    {
+      "input": [ 1, 0 ],
+      "targets": [ 1 ]
+    },
+    {
+      "input": [ 1, 1 ],
+      "targets": [ 1 ]
+    }
+
   ]
+
 }

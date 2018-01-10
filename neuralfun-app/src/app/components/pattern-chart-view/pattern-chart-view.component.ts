@@ -23,6 +23,10 @@ export class PatternChartViewComponent implements OnInit {
     private showLastLessonOnly: boolean = false;
     public steps:number[] = [];
 
+    @Input ('history')
+    public history:NetworkHistory;
+
+
     @Input('pattern-index') 
     public set patternIndex (value:number) {
         this._patternIndex = Number(value);    
@@ -86,7 +90,7 @@ export class PatternChartViewComponent implements OnInit {
 
     private includeStep(n: number): boolean {
 
-        const historyLength:number = this.mainService.network.history.length;
+        const historyLength:number = this.history.length;
         const lessonLength: number = this.mainService.lesson.training.length;
 
         if(n == historyLength - lessonLength + this._patternIndex)
@@ -118,13 +122,13 @@ export class PatternChartViewComponent implements OnInit {
         let segment:ChartSegment = this.chartOptionService.segments[this._selectedSegmentIndex].id; 
         switch(segment){
             case ChartSegment.ALL:
-                this.steps = this.getSteps(0, this.mainService.network.history.length);
+                this.steps = this.getSteps(0, this.history.length);
                 break;
 
             case ChartSegment.ONLY_LAST:
                 const lessonLength: number = this.mainService.lesson.training.length;
-                this.steps = this.getSteps(this.mainService.network.history.length-lessonLength+this._patternIndex, 
-                                            this.mainService.network.history.length-lessonLength+this._patternIndex+1);
+                this.steps = this.getSteps(this.history.length-lessonLength+this._patternIndex, 
+                                            this.history.length-lessonLength+this._patternIndex+1);
                 break;
                 
             default:

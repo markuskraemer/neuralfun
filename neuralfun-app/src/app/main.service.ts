@@ -12,11 +12,11 @@ export class MainService {
     public lessonLoader:DataLoader; 
     public epoches:number = 10;
     public totalEpoches:number = 0;
-    public patternIndex:number = 0;
+    private patternIndex:number = 0;
 
     private _selectedLessonIndex:number = 0;
     private _network:Network;
-    public isTraining:boolean = false;
+    public isBusy:boolean = false;
     private rafId:number;
     private requestAnimationFrame:(callback:any)=>number;
     private cancelAnimationFrame:(id:number)=>void;
@@ -78,8 +78,20 @@ export class MainService {
         this.networkChangeSubject.next(this.network);
     }
 
+    public startTest ():void {
+        this.isBusy = true;
+        for(let i:number = 0; i < this.lesson.test.length; ++i){
+            this.updateInputsAndTargetsTest (i);
+        }
+    }
+
+    private updateInputsAndTargetsTest (patternIndex:number):void {
+        this.network.setInputs(this.lesson.test[patternIndex].input);
+        this.network.setOutputTargets(this.lesson.test[patternIndex].targets);        
+    }
+
     public startOrStopTrain ():void {
-        if(this.isTraining){
+        if(this.isBusy){
             this.stopTrain ();
         }else{
             if(this.epoches > 0)
@@ -88,7 +100,7 @@ export class MainService {
     }
 
     private stopTrain ():void {       
-        this.isTraining = false;        
+        this.isBusy = false;        
         this.cancelAnimationFrame (this.rafId);    
     }
 
@@ -98,18 +110,15 @@ export class MainService {
     }
 
     private train ():void {
-        this.isTraining = true;
+        this.isBusy = true;
 
         if(this.trainNextEpoche ()){
             this.cancelAnimationFrame (this.rafId);
             this.rafId = this.requestAnimationFrame (()=>this.train());
         }else{
-            this.isTraining = false;
+            this.isBusy = false;
         }
     }
-
-
-
 
     private trainNextEpoche ():boolean {
         
