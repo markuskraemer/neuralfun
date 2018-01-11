@@ -1,11 +1,10 @@
-import { ChartSegment } from './chart-options.service';
 import { MainService } from './../../main.service';
 
 import { ColorService } from './../colors.service';
 import { NetworkHistory } from './../../network/NetworkHistory';
 import { Network } from './../../network/Network';
 import { Chart } from 'chart.js';
-import { Component, Input, OnInit, ViewChild, Directive, ViewContainerRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewChild, Directive, ViewContainerRef } from '@angular/core';
 
 class LineVisibilities {
     public neurons: boolean[] = [];
@@ -19,25 +18,35 @@ class LineVisibilities {
     templateUrl: './chart.component.html',
     styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent implements OnInit, OnChanges {
 
     private chart: Chart;
     private lineTension: number = 0;
     private lineVisibility: LineVisibilities;
     private _steps:number[] = [];
+    private _type:string = 'line';
+    private _needsNewChart:boolean;
 
     @ViewChild('myCanvas', {read:ViewContainerRef}) chartCanvas:ViewContainerRef; 
 
     @Input ('history')
     public history:NetworkHistory;
 
+    @Input ('type')
+    public set type (value:string) {
+        console.log("set type: " + value);
+
+        if(this._type != value){
+            this._type = value;
+            this._needsNewChart = true;
+        }
+    }
 
     @Input ('steps') 
     private set steps (value:number[]){
         this._steps = value;
-        //console.log("set steps: " + this.steps.length);
-
-        this.draw ();
+        console.log("set steps: " + this.steps.length);
+        //this.draw ();
     }
 
     private get steps ():number[]{
@@ -46,7 +55,7 @@ export class ChartComponent implements OnInit {
 
     @Input('update')
     public set update(value: boolean) {
-       // console.log("CV update: " + value);
+        console.log("CV update: " + value);
         if (value) {
             this.draw();
         }
@@ -59,20 +68,30 @@ export class ChartComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+        this.lineVisibility = new LineVisibilities ();    
+
         this.mainService.networkChangeSubject.subscribe((network: Network) => {
 
             if (network != null)
                 this.updateOnNetworkChange();
 
         })
+        
+    }
+
+    public ngOnChanges ():void {
+        console.log("-- onChanges -- _needsNewChart: " + this._needsNewChart);
+        if(this._needsNewChart){
+            this.setUpChart ();
+        }
+        this.draw ();
+        this._needsNewChart = false;
     }
 
     private updateOnNetworkChange(): void {
-        if (this.chart)
-            this.chart.destroy();
-
         this.lineVisibility = new LineVisibilities ();    
         this.setUpChart();
+        this.draw ();
     }
 
     private setUpChart(): void {
@@ -93,12 +112,13 @@ export class ChartComponent implements OnInit {
 
         }
 
-        config.type = 'line';
+        config.type = this._type;
         config.options = options;
 
+        if(this.chart)
+            this.chart.destroy ();
 
         this.chart = new Chart(<any>this.chartCanvas.element.nativeElement, config);
-
 
     }
 
@@ -113,6 +133,7 @@ export class ChartComponent implements OnInit {
                 lineTension: this.lineTension,
                 label: 'Neuron ' + neuronIds[i],
                 fill: false,
+                stack:'stackId_' + i,
                 backgroundColor: this.colorService.getNeuronOutputColor(i),
                 borderColor: this.colorService.getNeuronOutputColor(i),
                 data: this.history.getNeuronOutputAtIndicies(neuronIds[i], steps)
@@ -129,6 +150,7 @@ export class ChartComponent implements OnInit {
                 hidden: this.lineVisibility.neuronTargets[i],
                 lineTension: this.lineTension,
                 label: 'T Neuron ' + neuronIds[i],
+                stack:'stackId_' + i,
                 fill: false,
                 backgroundColor: this.colorService.getNeuronTargetColor(i),
                 borderColor: this.colorService.getNeuronTargetColor(i),
@@ -146,6 +168,7 @@ export class ChartComponent implements OnInit {
                 hidden: this.lineVisibility.neuronDeltas[i],
                 lineTension: this.lineTension,
                 label: 'Δ Neuron ' + neuronIds[i],
+                stack:'stackId_' + i,
                 fill: false,
                 backgroundColor: this.colorService.getDeltaColor(i),
                 borderColor: this.colorService.getDeltaColor(i),
@@ -160,6 +183,9 @@ export class ChartComponent implements OnInit {
     private getSquaredErrors (steps: number[]): any {
      
         var result: any[] = [];
+        if(this.lineVisibility == undefined || this.lineVisibility.squaredErrors == undefined || !steps || this.steps.length < 1){
+            console.log("ACTUNG");
+        }
         return {
                 hidden: this.lineVisibility.squaredErrors,
                 lineTension: this.lineTension,
@@ -193,14 +219,11 @@ export class ChartComponent implements OnInit {
 
 
     private draw(): void {
-        if (!this.chart)
+        if (!this.chart || !this.steps || this.steps.length < 1 || !this.history)
             return;
 
         this.updateLineVisibilities();
 
-       
-
-        console.log("steps: " + this.steps.length);
         var datasets: any[] = [];
         datasets = datasets.concat(this.getNeuronOutputs(this.steps, true));
         datasets = datasets.concat(this.getNeuronTargets(this.steps, true));

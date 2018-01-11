@@ -106,6 +106,8 @@ export class PatternChartViewComponent implements OnInit {
 
     private getSteps(start: number, end: number): number[] {
         console.log("createSteps: " + start + " > " + end);
+        start = Math.max(0, start);
+        end = Math.max(end, start);
         var result: number[] = [];
         for (let i: number = start; i < end; i++) {
           

@@ -10,7 +10,9 @@ import { MainService } from './main.service';
 })
 export class MainComponent {
 
-
+    public showNetworkChart:boolean;
+    public showTrainingCharts:boolean;
+    public showTestCharts:boolean;
 
     constructor (
         public mainService:MainService

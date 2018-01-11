@@ -8,5 +8,6 @@
                 >   
         </select>
     </div>
-    <chart [update]="updateChart()" [steps]="steps" [history]="history" ></chart>
+    selectedSegmentIndex: {{selectedSegmentIndex}}<br>
+    <chart [update]="updateChart()" [steps]="steps" [history]="history" [type]="steps.length > 1 ? 'line' : 'bar'"></chart>
 </div>

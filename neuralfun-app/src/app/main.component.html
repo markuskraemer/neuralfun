@@ -11,20 +11,30 @@
     <br>
     epochs:<input type="number" [value]="mainService.epoches" (change)="mainService.epoches = $event.target.value">
             <input type="button" value="{{mainService.isBusy?'STOP':'START'}}" (click)="mainService.startOrStopTrain()">
-    <br>
-    <input type="button" value="{{'START'}}" (click)="mainService.startTest()">
     totalEpoches:{{mainService.totalEpoches}}
     squaredErrors:{{mainService.network.getSquaredErrors ()}}
+    <br>
+    <input type="button" value="{{'START TEST'}}" (click)="mainService.startTest()">
+    <input type="checkbox" [value]="showNetworkChart" (change)="showNetworkChart = $event.target.checked">Show Network Charts<br>
+    <input type="checkbox" [value]="showTrainingCharts" (change)="showTrainingCharts = $event.target.checked">Show Trainig Charts<br>
+    <input type="checkbox" [value]="showTestCharts" (change)="showTestCharts = $event.target.checked">Show Trainig Charts<br>
+    
 </div>
-<div class="view-container">
+<div class="view-container" >
     <network-view [network]="mainService.network"></network-view>
 </div>
 
-<network-chart-view [update]="!mainService.isBusy"> 
+<network-chart-view [update]="!mainService.isBusy" *ngIf="showNetworkChart"> 
 </network-chart-view>
-
-<div *ngIf="mainService.lesson != undefined">
+<div *ngIf="mainService.lesson != undefined && showTrainingCharts">
     <pattern-chart-view *ngFor="let pattern of mainService.lesson.training; let i = index"
+        pattern-index={{i}} 
+        [update]="!mainService.isBusy"
+        [history]="mainService.network.history">
+    </pattern-chart-view>
+</div>
+<div *ngIf="mainService.lesson != undefined && showTestCharts">
+    <pattern-chart-view *ngFor="let pattern of mainService.lesson.test; let i = index"
         pattern-index={{i}} 
         [update]="!mainService.isBusy"
         [history]="mainService.network.history">
