@@ -1,11 +1,10 @@
 import { ChartOptionsService, ChartSegment } from './chart-options.service';
 import { MainService } from './../../main.service';
-
 import { ColorService } from './../colors.service';
 import { NetworkHistory } from './../../network/NetworkHistory';
 import { Network } from './../../network/Network';
 import { Chart } from 'chart.js';
-import { Component, Input, OnInit, ViewChild, Directive, ViewContainerRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, Directive, ViewContainerRef, ChangeDetectionStrategy, ApplicationRef } from '@angular/core';
 
 
 @Component({
@@ -20,8 +19,14 @@ export class PatternChartViewComponent implements OnInit {
     private _update:boolean = false;
     private _updateChart:boolean = false;
     private _selectedSegmentIndex: number = 0;
+    private _lessonLength:number = 0;
     private showLastLessonOnly: boolean = false;
     public steps:number[] = [];
+
+    @Input ('lesson-length')
+    public set lessonLength (value:string){
+        this._lessonLength = parseInt(value);
+    }
 
     @Input ('history')
     public history:NetworkHistory;
@@ -61,8 +66,10 @@ export class PatternChartViewComponent implements OnInit {
 
     constructor(
         private mainService: MainService,
-        public chartOptionService:ChartOptionsService
+        public chartOptionService:ChartOptionsService,
+        public appRef:ApplicationRef
     ) {
+        
     }
 
     public ngOnInit(): void {
@@ -75,8 +82,11 @@ export class PatternChartViewComponent implements OnInit {
     }
 
     private doUpdate ():void {
-        this.calculateSteps ();
-        this._updateChart = true;
+        console.log("-- doUpdate --");
+      
+            this.calculateSteps ();
+            this._updateChart = true;
+           
     }
 
     public updateChart ():boolean {
@@ -91,12 +101,11 @@ export class PatternChartViewComponent implements OnInit {
     private includeStep(n: number): boolean {
 
         const historyLength:number = this.history.length;
-        const lessonLength: number = this.mainService.lesson.training.length;
 
-        if(n == historyLength - lessonLength + this._patternIndex)
+        if(n == historyLength - this._lessonLength + this._patternIndex)
             return true;
 
-        const mod: number = lessonLength * Math.ceil(historyLength / 100);
+        const mod: number = this._lessonLength * Math.ceil(historyLength / 100);
 
         if (n % mod == this.patternIndex)
             return true;
@@ -128,9 +137,8 @@ export class PatternChartViewComponent implements OnInit {
                 break;
 
             case ChartSegment.ONLY_LAST:
-                const lessonLength: number = this.mainService.lesson.training.length;
-                this.steps = this.getSteps(this.history.length-lessonLength+this._patternIndex, 
-                                            this.history.length-lessonLength+this._patternIndex+1);
+                this.steps = this.getSteps(this.history.length-this._lessonLength+this._patternIndex, 
+                                            this.history.length-this._lessonLength+this._patternIndex+1);
                 break;
                 
             default:

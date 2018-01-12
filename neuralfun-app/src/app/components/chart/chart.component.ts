@@ -34,7 +34,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
     @Input ('type')
     public set type (value:string) {
-        console.log("set type: " + value);
+        //console.log("set type: " + value);
 
         if(this._type != value){
             this._type = value;
@@ -45,7 +45,7 @@ export class ChartComponent implements OnInit, OnChanges {
     @Input ('steps') 
     private set steps (value:number[]){
         this._steps = value;
-        console.log("set steps: " + this.steps.length);
+        //console.log("set steps: " + this.steps.length);
         //this.draw ();
     }
 
@@ -55,7 +55,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
     @Input('update')
     public set update(value: boolean) {
-        console.log("CV update: " + value);
+        //console.log("CV update: " + value);
         if (value) {
             this.draw();
         }
@@ -80,7 +80,7 @@ export class ChartComponent implements OnInit, OnChanges {
     }
 
     public ngOnChanges ():void {
-        console.log("-- onChanges -- _needsNewChart: " + this._needsNewChart);
+        //console.log("-- onChanges -- _needsNewChart: " + this._needsNewChart);
         if(this._needsNewChart){
             this.setUpChart ();
         }

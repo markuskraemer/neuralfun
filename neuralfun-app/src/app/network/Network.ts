@@ -7,7 +7,8 @@ import { Connection } from './Connection';
 export class Network
 {
     public neurons: Neuron[][] = [];
-    public history:NetworkHistory = new NetworkHistory ();
+    public trainingHistory:NetworkHistory = new NetworkHistory ();
+    public testHistory:NetworkHistory = new NetworkHistory ();
 
     constructor(private sizes: number[])
     {
@@ -233,10 +234,17 @@ export class Network
         }
     }
 
+    public writeToTestHistory ():void {
+        this.testHistory.add(this.toJSON());
+    }
+
+    public writeToTrainingHistory ():void {
+        this.trainingHistory.add(this.toJSON());
+    }
+
+
     public trainDelta(): void
     {
-        this.history.add(this.toJSON());
-       // console.log("-> ", this.history.history[this.history.history.length-1]);
         var outputLayer: WorkingNeuron[] = this.getOutputLayer();
         for (var neuron of outputLayer)
             neuron.trainWeightsDelta();
@@ -244,9 +252,7 @@ export class Network
     }
 
     public trainBackPropagation(): void
-    {
-        this.history.add(this.toJSON());
-        
+    {    
         this.trainOutputNeuronsBackPropagation();
         if (this.neurons.length > 2)
             this.trainHiddenNeuronsBackPropagation();

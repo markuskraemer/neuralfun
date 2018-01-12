@@ -14,10 +14,16 @@
     totalEpoches:{{mainService.totalEpoches}}
     squaredErrors:{{mainService.network.getSquaredErrors ()}}
     <br>
-    <input type="button" value="{{'START TEST'}}" (click)="mainService.startTest()">
-    <input type="checkbox" [value]="showNetworkChart" (change)="showNetworkChart = $event.target.checked">Show Network Charts<br>
-    <input type="checkbox" [value]="showTrainingCharts" (change)="showTrainingCharts = $event.target.checked">Show Trainig Charts<br>
-    <input type="checkbox" [value]="showTestCharts" (change)="showTestCharts = $event.target.checked">Show Trainig Charts<br>
+    <input type="button" value="{{'START TEST'}}" (click)="mainService.startTest()"><br>
+    <input id="network-cb" type="checkbox" [value]="showNetworkChart" (change)="showNetworkChart = $event.target.checked">
+    <label for="network-cb">Show Network Charts</label>
+    <br>
+    <input id="training-cb" type="checkbox" [value]="showTrainingCharts" (change)="showTrainingCharts = $event.target.checked">
+    <label for="training-cb">Show Trainig Charts</label>
+    <br>
+    <input id="test-cb" type="checkbox" [value]="showTestCharts" (change)="showTestCharts = $event.target.checked">
+    <label for="test-cb">Show Test Charts</label>
+    <br>
     
 </div>
 <div class="view-container" >
@@ -30,13 +36,16 @@
     <pattern-chart-view *ngFor="let pattern of mainService.lesson.training; let i = index"
         pattern-index={{i}} 
         [update]="!mainService.isBusy"
-        [history]="mainService.network.history">
+        [history]="mainService.network.trainingHistory"
+        [lesson-length]="mainService.lesson.training.length">
     </pattern-chart-view>
 </div>
 <div *ngIf="mainService.lesson != undefined && showTestCharts">
     <pattern-chart-view *ngFor="let pattern of mainService.lesson.test; let i = index"
         pattern-index={{i}} 
         [update]="!mainService.isBusy"
-        [history]="mainService.network.history">
+        [history]="mainService.network.testHistory"
+        [lesson-length]="mainService.lesson.test.length">
+
     </pattern-chart-view>
 </div>

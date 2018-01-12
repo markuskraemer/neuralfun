@@ -82,7 +82,10 @@ export class MainService {
         this.isBusy = true;
         for(let i:number = 0; i < this.lesson.test.length; ++i){
             this.updateInputsAndTargetsTest (i);
+            this.network.writeToTestHistory ();
         }
+        setTimeout (() => this.isBusy = false, 500);
+        
     }
 
     private updateInputsAndTargetsTest (patternIndex:number):void {
@@ -125,6 +128,7 @@ export class MainService {
         if(-- this.epoches >= 0) {
             for(this.patternIndex = 0; this.patternIndex < this.lesson.training.length; ++this.patternIndex){
                 this.updateInputsAndTargets ();
+                this.network.writeToTrainingHistory ();
                 this.network.trainDelta ();
             }
     
