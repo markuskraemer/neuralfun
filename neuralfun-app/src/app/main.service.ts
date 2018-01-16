@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { Network } from './network/Network';
 import { DataLoader } from './data/DataLoader';
-import { ILesson } from './data/ILessons';
+import { Lesson } from './data/ILessons';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -44,7 +44,7 @@ export class MainService {
     }
 
 
-    public get lesson ():ILesson {
+    public get lesson ():Lesson {
         return this.lessonLoader.lessons[this._selectedLessonIndex];
     }
 

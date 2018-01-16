@@ -1,0 +1,7 @@
+<div *ngIf="type==='array'">
+    <span *ngFor="let item of pattern.input">{{item}} </span>
+</div>
+<div *ngIf="type==='image'">
+    <img src="{{pattern.canvasDataURL}}" class="image"/><br>
+    {{pattern.input}}
+</div>

@@ -3,17 +3,19 @@
 <div class="neurons-container" id="neurons-container">
 
     <!-- input neurons -->
-    <div class="layer"> 
-        <neuron-view *ngFor="let neuron of network.getInputLayer()" [neuron]="neuron" attr.id="neuron_{{neuron.id}}"></neuron-view>
+    <div class="layer" *ngIf="network.getInputLayer().length < maxLayerSize"> 
+        <neuron-view  *ngFor="let neuron of network.getInputLayer()" [neuron]="neuron" attr.id="neuron_{{neuron.id}}"></neuron-view>
     </div>
 
     <!-- hidden neurons -->
     <div class="layer" *ngFor="let layer of network.getHiddenLayers()">
-        <neuron-view *ngFor="let neuron of layer" [neuron]="neuron" attr.id="neuron_{{neuron.id}}"></neuron-view>
+        <span *ngIf="layer.length < maxLayerSize">
+            <neuron-view *ngFor="let neuron of layer" [neuron]="neuron" attr.id="neuron_{{neuron.id}}"></neuron-view>
+        </span>
     </div>
 
     <!-- output neurons -->
-    <div class="layer">
+    <div class="layer" *ngIf="network.getOutputLayer().length < maxLayerSize">
         <neuron-view *ngFor="let neuron of network.getOutputLayer();let i = index" 
                             [neuron]="neuron" 
                             [color]="colorService.getNeuronOutputColor(i)" 

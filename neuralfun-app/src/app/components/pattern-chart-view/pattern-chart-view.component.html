@@ -1,5 +1,6 @@
 <div className="chart-view">
-    Pattern Nr.:{{patternIndex}} update:{{update}}
+    Pattern Nr.:{{patternIndex}}
+    <app-input-view [pattern]="pattern"></app-input-view>
     <div className="menu">
         <select [(ngModel)]="selectedSegmentIndex">
         <option *ngFor="let segments of chartOptionService.segments; let i = index"               

@@ -65,10 +65,11 @@ export class ChartComponent implements OnInit, OnChanges {
         private colorService: ColorService,
         private mainService: MainService
     ) {
+         this.lineVisibility = new LineVisibilities ();    
     }
 
     public ngOnInit(): void {
-        this.lineVisibility = new LineVisibilities ();    
+       
 
         this.mainService.networkChangeSubject.subscribe((network: Network) => {
 

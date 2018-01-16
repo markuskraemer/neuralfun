@@ -1,3 +1,4 @@
+import { InputViewComponent } from './components/input-view/input-view.component';
 import { ChartOptionsService } from './components/pattern-chart-view/chart-options.service';
 import { ChartComponent } from './components/chart/chart.component';
 import { PatternChartViewComponent } from './components/pattern-chart-view/pattern-chart-view.component';
@@ -22,7 +23,8 @@ import { AppComponent } from './app.component';
     NeuronViewComponent,
     NetworkChartViewComponent,
     PatternChartViewComponent,
-    ChartComponent
+    ChartComponent,
+    InputViewComponent
   ],
   imports: [
     BrowserModule,

@@ -41,7 +41,7 @@ export class WorkingNeuron extends Neuron
 
     public get output(): number
     {
-        return this.tanh(this.input);
+        return Math.tanh(this.input);
         //return this.sigmoid(this.input);
     }
 
@@ -64,8 +64,14 @@ export class WorkingNeuron extends Neuron
     {
         var ePowPlusN = Math.pow(Math.E, n);
         var ePowMinusN = Math.pow(Math.E, -n);
+        
+        //const result:number = (ePowPlusN - ePowMinusN) / (ePowPlusN + ePowMinusN);
+        const result:number = Math.tanh (n);
+        if(isNaN(result)){
+            throw ("NAN! "+ n + ':' + ePowPlusN + ':' + ePowMinusN);
+        } 
 
-        return (ePowPlusN - ePowMinusN) / (ePowPlusN + ePowMinusN);
+        return result;
     }
 
     private sigmoid (n: number): number

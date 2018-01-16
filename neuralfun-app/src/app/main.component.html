@@ -26,10 +26,11 @@
     <br>
     
 </div>
+<!--
 <div class="view-container" >
     <network-view [network]="mainService.network"></network-view>
 </div>
-
+-->
 <network-chart-view [update]="!mainService.isBusy" *ngIf="showNetworkChart"> 
 </network-chart-view>
 <div *ngIf="mainService.lesson != undefined && showTrainingCharts">
@@ -37,7 +38,8 @@
         pattern-index={{i}} 
         [update]="!mainService.isBusy"
         [history]="mainService.network.trainingHistory"
-        [lesson-length]="mainService.lesson.training.length">
+        [lesson-length]="mainService.lesson.training.length"
+        [pattern]="pattern">
     </pattern-chart-view>
 </div>
 <div *ngIf="mainService.lesson != undefined && showTestCharts">
@@ -45,7 +47,7 @@
         pattern-index={{i}} 
         [update]="!mainService.isBusy"
         [history]="mainService.network.testHistory"
-        [lesson-length]="mainService.lesson.test.length">
-
+        [lesson-length]="mainService.lesson.test.length"
+        [pattern]="pattern">
     </pattern-chart-view>
 </div>

@@ -1,27 +1,812 @@
 {
-  "name": "1-4",
+  "name": "numbers",
+  "sources": {
+    "n0": "assets/lessons/4/mnistExamples.png"
+  },
+  "clipping-width": 27,
+  "clipping-height": 30,
   "training": [
     {
-      "input": [ 0, 0, 0 ],
+      "input": {"source":"n0", "row":0, "col":0},
       "targets": [ 0 ]
     },
     {
-      "input": [ 1, 1, 1 ],
-      "targets": [ 0.25 ]
+      "input": {"source":"n0", "row":0, "col":1},
+      "targets": [ 0 ]
     },
     {
-      "input": [ 1, 0, 0 ],
-      "targets": [ 0.5 ]
+      "input": {"source":"n0", "row":0, "col":2},
+      "targets": [ 0 ]
+    },{
+      "input": {"source":"n0", "row":0, "col":3},
+      "targets": [ 0 ]
     },
     {
-      "input": [ 0, 1, 0 ],
+      "input": {"source":"n0", "row":0, "col":4},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":0, "col":5},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":0, "col":6},
+      "targets": [ 0 ]
+    },{
+      "input": {"source":"n0", "row":0, "col":7},
+      "targets": [ 0 ]
+    },{
+      "input": {"source":"n0", "row":0, "col":8},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":0, "col":9},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":0, "col":10},
+      "targets": [ 0 ]
+    },{
+      "input": {"source":"n0", "row":0, "col":11},
+      "targets": [ 0 ]
+    },{
+      "input": {"source":"n0", "row":0, "col":12},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":0, "col":13},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":0, "col":14},
+      "targets": [ 0 ]
+    },{
+      "input": {"source":"n0", "row":0, "col":15},
+      "targets": [ 0 ]
+    },{
+      "input": {"source":"n0", "row":0, "col":16},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":0, "col":17},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":0, "col":18},
+      "targets": [ 0 ]
+    },{
+      "input": {"source":"n0", "row":0, "col":19},
+      "targets": [ 0 ]
+    },
+
+
+
+
+    {
+      "input": {"source":"n0", "row":1, "col":0},
+      "targets": [ 0 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":1},
       "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":2},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":3},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":4},
+      "targets": [ 1 ]
+    },
+         {
+      "input": {"source":"n0", "row":1, "col":5},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":6},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":7},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":8},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":9},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":10},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":11},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":12},
+      "targets": [ 1 ]
+    },
+         {
+      "input": {"source":"n0", "row":1, "col":13},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":14},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":15},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":16},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":17},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":18},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":19},
+      "targets": [ 1 ]
+    },
+
+    {
+      "input": {"source":"n0", "row":2, "col":0},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":1},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":2},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":3},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":4},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":5},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":6},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":7},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":8},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":9},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":10},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":11},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":12},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":13},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":14},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":15},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":16},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":17},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":18},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":19},
+      "targets": [ 2 ]
+    },
+
+
+
+{
+      "input": {"source":"n0", "row":3, "col":0},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":1},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":2},
+      "targets": [ 3 ]
+    },{
+      "input": {"source":"n0", "row":3, "col":3},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":4},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":5},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":6},
+      "targets": [ 3 ]
+    },{
+      "input": {"source":"n0", "row":3, "col":7},
+      "targets": [ 3 ]
+    },{
+      "input": {"source":"n0", "row":3, "col":8},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":9},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":10},
+      "targets": [ 3 ]
+    },{
+      "input": {"source":"n0", "row":3, "col":11},
+      "targets": [ 3 ]
+    },{
+      "input": {"source":"n0", "row":3, "col":12},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":13},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":14},
+      "targets": [ 3 ]
+    },{
+      "input": {"source":"n0", "row":3, "col":15},
+      "targets": [ 3 ]
+    },{
+      "input": {"source":"n0", "row":3, "col":16},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":17},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":18},
+      "targets": [ 3 ]
+    },{
+      "input": {"source":"n0", "row":3, "col":19},
+      "targets": [ 3 ]
+    },
+
+
+
+{
+      "input": {"source":"n0", "row":4, "col":0},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":1},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":2},
+      "targets": [ 4 ]
+    },{
+      "input": {"source":"n0", "row":4, "col":3},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":4},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":5},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":6},
+      "targets": [ 4 ]
+    },{
+      "input": {"source":"n0", "row":4, "col":7},
+      "targets": [ 4 ]
+    },{
+      "input": {"source":"n0", "row":4, "col":8},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":9},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":10},
+      "targets": [ 4 ]
+    },{
+      "input": {"source":"n0", "row":4, "col":11},
+      "targets": [ 4 ]
+    },{
+      "input": {"source":"n0", "row":4, "col":12},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":13},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":14},
+      "targets": [ 4 ]
+    },{
+      "input": {"source":"n0", "row":4, "col":15},
+      "targets": [ 4 ]
+    },{
+      "input": {"source":"n0", "row":4, "col":16},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":17},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":18},
+      "targets": [ 4 ]
+    },{
+      "input": {"source":"n0", "row":4, "col":19},
+      "targets": [ 4 ]
+    },
+
+
+{
+      "input": {"source":"n0", "row":5, "col":0},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":1},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":2},
+      "targets": [ 5 ]
+    },{
+      "input": {"source":"n0", "row":5, "col":3},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":4},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":5},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":6},
+      "targets": [ 5 ]
+    },{
+      "input": {"source":"n0", "row":5, "col":7},
+      "targets": [ 5 ]
+    },{
+      "input": {"source":"n0", "row":5, "col":8},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":9},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":10},
+      "targets": [ 5 ]
+    },{
+      "input": {"source":"n0", "row":5, "col":11},
+      "targets": [ 5 ]
+    },{
+      "input": {"source":"n0", "row":5, "col":12},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":13},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":14},
+      "targets": [ 5 ]
+    },{
+      "input": {"source":"n0", "row":5, "col":15},
+      "targets": [ 5 ]
+    },{
+      "input": {"source":"n0", "row":5, "col":16},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":17},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":18},
+      "targets": [ 5 ]
+    },{
+      "input": {"source":"n0", "row":5, "col":19},
+      "targets": [ 5 ]
+    },
+
+
+
+{
+      "input": {"source":"n0", "row":6, "col":0},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":1},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":2},
+      "targets": [ 6]
+    },{
+      "input": {"source":"n0", "row":6, "col":3},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":4},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":5},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":6},
+      "targets": [ 6]
+    },{
+      "input": {"source":"n0", "row":6, "col":7},
+      "targets": [ 6]
+    },{
+      "input": {"source":"n0", "row":6, "col":8},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":9},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":10},
+      "targets": [ 6]
+    },{
+      "input": {"source":"n0", "row":6, "col":11},
+      "targets": [ 6]
+    },{
+      "input": {"source":"n0", "row":6, "col":12},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":13},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":14},
+      "targets": [ 6]
+    },{
+      "input": {"source":"n0", "row":6, "col":15},
+      "targets": [ 6]
+    },{
+      "input": {"source":"n0", "row":6, "col":16},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":17},
+      "targets": [ 6]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":18},
+      "targets": [ 6]
+    },{
+      "input": {"source":"n0", "row":6, "col":19},
+      "targets": [ 6]
+    },
+
+{
+      "input": {"source":"n0", "row":7, "col":0},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":1},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":2},
+      "targets": [ 7]
+    },{
+      "input": {"source":"n0", "row":7, "col":3},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":4},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":5},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":6},
+      "targets": [ 7]
+    },{
+      "input": {"source":"n0", "row":7, "col":7},
+      "targets": [ 7]
+    },{
+      "input": {"source":"n0", "row":7, "col":8},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":9},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":10},
+      "targets": [ 7]
+    },{
+      "input": {"source":"n0", "row":7, "col":11},
+      "targets": [ 7]
+    },{
+      "input": {"source":"n0", "row":7, "col":12},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":13},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":14},
+      "targets": [ 7]
+    },{
+      "input": {"source":"n0", "row":7, "col":15},
+      "targets": [ 7]
+    },{
+      "input": {"source":"n0", "row":7, "col":16},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":17},
+      "targets": [ 7]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":18},
+      "targets": [ 7]
+    },{
+      "input": {"source":"n0", "row":7, "col":19},
+      "targets": [ 7]
+    },
+
+{
+      "input": {"source":"n0", "row":8, "col":0},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":1},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":2},
+      "targets": [ 8 ]
+    },{
+      "input": {"source":"n0", "row":8, "col":3},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":4},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":5},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":6},
+      "targets": [ 8 ]
+    },{
+      "input": {"source":"n0", "row":8, "col":7},
+      "targets": [ 8 ]
+    },{
+      "input": {"source":"n0", "row":8, "col":8},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":9},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":10},
+      "targets": [ 8 ]
+    },{
+      "input": {"source":"n0", "row":8, "col":11},
+      "targets": [ 8 ]
+    },{
+      "input": {"source":"n0", "row":8, "col":12},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":13},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":14},
+      "targets": [ 8 ]
+    },{
+      "input": {"source":"n0", "row":8, "col":15},
+      "targets": [ 8 ]
+    },{
+      "input": {"source":"n0", "row":8, "col":16},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":17},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":18},
+      "targets": [ 8 ]
+    },{
+      "input": {"source":"n0", "row":8, "col":19},
+      "targets": [ 8 ]
+    },
+
+
+{
+      "input": {"source":"n0", "row":9, "col":0},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":1},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":2},
+      "targets": [ 9 ]
+    },{
+      "input": {"source":"n0", "row":9, "col":3},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":4},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":5},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":6},
+      "targets": [ 9 ]
+    },{
+      "input": {"source":"n0", "row":9, "col":7},
+      "targets": [ 9 ]
+    },{
+      "input": {"source":"n0", "row":9, "col":8},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":9},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":10},
+      "targets": [ 9 ]
+    },{
+      "input": {"source":"n0", "row":9, "col":11},
+      "targets": [ 9 ]
+    },{
+      "input": {"source":"n0", "row":9, "col":12},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":13},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":14},
+      "targets": [ 9 ]
+    },{
+      "input": {"source":"n0", "row":9, "col":15},
+      "targets": [ 9 ]
+    },{
+      "input": {"source":"n0", "row":9, "col":16},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":17},
+      "targets": [ 9 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":18},
+      "targets": [ 9 ]
+    },{
+      "input": {"source":"n0", "row":9, "col":19},
+      "targets": [ 9 ]
     }
+
+
   ],
   "test": [
-     {
-      "input": [ 1, 1, 1 ],
+    {
+      "input": {"source":"n0", "row":0, "col":0},
       "targets": [ 0 ]
-    } 
+    },
+    {
+      "input": {"source":"n0", "row":1, "col":0},
+      "targets": [ 1 ]
+    },
+    {
+      "input": {"source":"n0", "row":2, "col":0},
+      "targets": [ 2 ]
+    },
+    {
+      "input": {"source":"n0", "row":3, "col":0},
+      "targets": [ 3 ]
+    },
+    {
+      "input": {"source":"n0", "row":4, "col":0},
+      "targets": [ 4 ]
+    },
+    {
+      "input": {"source":"n0", "row":5, "col":0},
+      "targets": [ 5 ]
+    },
+    {
+      "input": {"source":"n0", "row":6, "col":0},
+      "targets": [ 6 ]
+    },
+    {
+      "input": {"source":"n0", "row":7, "col":0},
+      "targets": [ 7 ]
+    },
+    {
+      "input": {"source":"n0", "row":8, "col":0},
+      "targets": [ 8 ]
+    },
+    {
+      "input": {"source":"n0", "row":9, "col":0},
+      "targets": [ 9 ]
+    }
+
+
   ]
 }

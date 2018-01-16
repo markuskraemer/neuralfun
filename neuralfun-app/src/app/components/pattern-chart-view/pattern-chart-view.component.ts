@@ -1,3 +1,4 @@
+import { IPattern } from './../../data/ILessons';
 import { ChartOptionsService, ChartSegment } from './chart-options.service';
 import { MainService } from './../../main.service';
 import { ColorService } from './../colors.service';
@@ -22,6 +23,9 @@ export class PatternChartViewComponent implements OnInit {
     private _lessonLength:number = 0;
     private showLastLessonOnly: boolean = false;
     public steps:number[] = [];
+
+    @Input ('pattern')
+    public pattern:IPattern;
 
     @Input ('lesson-length')
     public set lessonLength (value:string){
@@ -82,11 +86,10 @@ export class PatternChartViewComponent implements OnInit {
     }
 
     private doUpdate ():void {
-        console.log("-- doUpdate --");
+        //console.log("-- doUpdate --");
       
-            this.calculateSteps ();
-            this._updateChart = true;
-           
+        this.calculateSteps ();
+        this._updateChart = true;           
     }
 
     public updateChart ():boolean {
@@ -114,7 +117,7 @@ export class PatternChartViewComponent implements OnInit {
     }
 
     private getSteps(start: number, end: number): number[] {
-        console.log("createSteps: " + start + " > " + end);
+        //console.log("createSteps: " + start + " > " + end);
         start = Math.max(0, start);
         end = Math.max(end, start);
         var result: number[] = [];
@@ -128,7 +131,7 @@ export class PatternChartViewComponent implements OnInit {
     }
 
     private calculateSteps ():void {
-       // console.log("calcSteps");
+       // //console.log("calcSteps");
        
         let segment:ChartSegment = this.chartOptionService.segments[this._selectedSegmentIndex].id; 
         switch(segment){
@@ -143,9 +146,9 @@ export class PatternChartViewComponent implements OnInit {
                 
             default:
                 this.steps = [];
-                console.error("_selectedFilterIndex not recordnized: ", segment);
+                //console.error("_selectedFilterIndex not recordnized: ", segment);
         }
-        console.log("this.steps: ", this.steps);
+        //console.log("this.steps: ", this.steps);
     }
 
 }

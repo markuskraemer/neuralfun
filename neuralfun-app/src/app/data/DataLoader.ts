@@ -1,5 +1,5 @@
 ﻿
-import { ILesson } from './ILessons';
+import { ILesson, LessonFactory, Lesson } from './ILessons';
 import { RequestLoader } from './RequestLoader';
 import { BehaviorSubject } from 'rxjs';
 
@@ -11,7 +11,7 @@ export class DataLoader
 
     private count: number;
     private loader: RequestLoader = new RequestLoader ();
-    private _lessons: ILesson[] = [];
+    private _lessons: Lesson[] = [];
     private state: number = DataLoader.NOT_STARTED;
 
     public stateChangedSubject:BehaviorSubject<number> = new BehaviorSubject (this.state);
@@ -28,7 +28,7 @@ export class DataLoader
         return this.state == DataLoader.LOAD_FINISHED;
     }
 
-    public get lessons(): ILesson[]
+    public get lessons(): Lesson[]
     {
         return this._lessons;
     }
@@ -53,8 +53,8 @@ export class DataLoader
 
     private handleDataLoadedOK(value): void
     {
-        console.log("loadedOK: " + this.loader.request.status);
-        this._lessons.push(JSON.parse(value));
+        console.log("loadedOK: " , value);
+        this._lessons.push(LessonFactory.createLesson (JSON.parse(value)));
         this.loadNext();
     }
 

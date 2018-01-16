@@ -11,6 +11,8 @@ export class NetworkViewComponent {
 
   @Input('network') public network:Network;
 
+    public readonly maxLayerSize:number = 15; 
+
   constructor (
     private applicationRef:ApplicationRef,
     private changeDetectorRef:ChangeDetectorRef,

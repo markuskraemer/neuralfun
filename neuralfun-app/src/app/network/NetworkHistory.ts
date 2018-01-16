@@ -147,10 +147,10 @@ export class NetworkHistory
         var result: number[] = [];
         for (let i: number = 0; i < indicies.length; i ++)
         {
-            try {
+            if(this.history[indicies[i]]){            
                 result.push(this._history[indicies[i]]['squaredErrors'])
-            }catch(e){
-                console.log("wtf? ", e);
+            }else{
+                console.log("wtf? ", indicies[i]);
             }
         }
         return result;
